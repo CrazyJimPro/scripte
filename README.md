@@ -1,7 +1,3 @@
-Sehr gut 👍 Dann schreibe ich dir ein fertiges `README.md` in Markdown für dein GitHub-Repo.
-Du kannst es direkt kopieren und einfügen:
-
-````markdown
 # 🚀 Docker + Docker Compose + Portainer Installer
 
 Dieses Repository enthält ein Bash-Skript zur automatischen Installation von:
@@ -29,7 +25,6 @@ Dieses Repository enthält ein Bash-Skript zur automatischen Installation von:
    ```bash
    git clone https://github.com/<dein-repo>/docker-portainer-install.git
    cd docker-portainer-install
-````
 
 2. Script ausführbar machen:
 
