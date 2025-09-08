@@ -62,6 +62,10 @@ services:
       AUTHENTIK_POSTGRESQL__PASSWORD: ${AUTHENTIK_POSTGRES_PASSWORD}
       AUTHENTIK_POSTGRESQL__NAME: ${AUTHENTIK_POSTGRES_DB}
       AUTHENTIK_REDIS__HOST: redis
+      AUTHENTIK_BOOTSTRAP_PASSWORD: ${AUTHENTIK_BOOTSTRAP_PASSWORD:-admin}
+      AUTHENTIK_BOOTSTRAP_EMAIL: "admin@example.com"
+      AUTHENTIK_HOST: "http://192.168.178.7:9000"
+      AUTHENTIK_HOST__HTTPS: "https://192.168.178.7:9443"
     volumes:
       - ./authentik/media:/media
       - ./authentik/custom-templates:/templates
