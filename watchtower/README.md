@@ -31,8 +31,8 @@ Watchtower überprüft regelmäßig alle Docker-Container auf Updates und aktual
 ### 2. Installation mit Einzeiler
 
 ```
-bash
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/<BENUTZERNAME>/scripte/main/watchtower/watchtower.sh)"
+
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/<BENUTZERNAME>/scripte/main/watchtower/watchtower-setup.sh)"
 
 
 *(ersetze `<BENUTZERNAME>` durch deinen GitHub-Benutzernamen)*
@@ -45,7 +45,7 @@ Nach der Installation wird lediglich der Container erstellt:
 
 ```
 watchtower/
-└── watchtower.sh      # Installationsskript
+└── watchtower-setup.sh      # Installationsskript
 ```
 
 ---
