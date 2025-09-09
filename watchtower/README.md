@@ -1,81 +1,96 @@
-Alles klar 👍 – dann machen wir das README so, dass jedes Script einen **Einzeiler zum direkten Ausführen** bekommt, und beim Watchtower geben wir zusätzlich noch die wichtigsten Infos.
+Sehr cool 🤝 jetzt sehe ich, wie du dir die einzelnen `README.md`-Dateien vorstellst: mit Badges, Quick Start, Features usw.
 
-Hier die überarbeitete Variante:
+Hier ist die **angepasste Version für dein Watchtower-Skript**, im exakt gleichen Stil wie dein `authentik-setup`:
 
 ````markdown
-# Docker-Skripte Sammlung
+# Watchtower Setup Script for Raspberry Pi / Linux
 
-Dieses Repository enthält verschiedene Bash-Skripte zur Installation und Verwaltung von Docker-Containern.  
-Alle Skripte können direkt per Einzeiler ausgeführt werden.
+[![Docker](https://img.shields.io/badge/Docker-✔-2496ED?logo=docker&logoColor=white)](https://www.docker.com/) 
+[![Raspberry Pi](https://img.shields.io/badge/Raspberry%20Pi-Supported-C51A4A?logo=raspberrypi&logoColor=white)](https://www.raspberrypi.com/)  
+[![GitHub stars](https://img.shields.io/github/stars/<BENUTZERNAME>/watchtower-setup?style=social)](https://github.com/<BENUTZERNAME>/watchtower-setup/stargazers) 
+[![GitHub forks](https://img.shields.io/github/forks/<BENUTZERNAME>/watchtower-setup?style=social)](https://github.com/<BENUTZERNAME>/watchtower-setup/network/members)  
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+Dieses Repository enthält ein Bash-Skript, das den [Watchtower](https://containrrr.dev/watchtower/) Container installiert.  
+Watchtower überprüft regelmäßig alle Docker-Container auf Updates und aktualisiert diese automatisch.  
 
 ---
 
-## Skripte
+## ✨ Features
 
-### Watchtower
-Startet den [Watchtower](https://containrrr.dev/watchtower/) Container, der automatisch alle laufenden Docker-Container auf Updates überprüft und aktualisiert.  
-- Cleanup von alten Images (`WATCHTOWER_CLEANUP=true`)  
-- Intervall: alle **5 Stunden**  
-- Container startet automatisch nach einem Reboot neu  
+- Automatische Updates für **alle laufenden Container**  
+- Bereinigt alte Images nach Updates (`WATCHTOWER_CLEANUP=true`)  
+- Standard-Intervall: alle **5 Stunden** (`--interval 18000`)  
+- Container startet automatisch nach Reboot (`--restart unless-stopped`)  
+- Geeignet für **Raspberry Pi** und **Linux-Server**  
 
-**Einzeiler:**
+---
+
+## 🚀 Quick Start
+
+### 1. Voraussetzungen
+
+- Docker installiert  
+- Benutzer hat Rechte, den Docker Daemon (`/var/run/docker.sock`) zu nutzen  
+
+### 2. Installation mit Einzeiler
+
 ```bash
-bash -c "$(curl -fsSL https://github.com/CrazyJimPro/scripte/main/watchtower/watchtower.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/<BENUTZERNAME>/scripte/main/watchtower/watchtower.sh)"
 ````
 
-Logs ansehen:
+*(ersetze `<BENUTZERNAME>` durch deinen GitHub-Benutzernamen)*
 
-```bash
-docker logs -f watchtower
+---
+
+## 📂 Projektstruktur
+
+Nach der Installation wird lediglich der Container erstellt:
+
+```
+watchtower/
+└── watchtower.sh      # Installationsskript
 ```
 
 ---
 
-### Authentik
+## 🛠️ Verwaltung
 
-Installiert den **Authentik** Identity Provider.
+* Logs anzeigen:
 
-**Einzeiler:**
+  ```bash
+  docker logs -f watchtower
+  ```
 
-```bash
-bash -c "$(curl -fsSL https://github.com/CrazyJimPro/scripte/main/authentik/authentik-setup.sh)"
-```
+* Container stoppen:
 
----
+  ```bash
+  docker stop watchtower
+  ```
 
-### Portainer
+* Container entfernen:
 
-Startet **Portainer** als Weboberfläche für Docker-Management.
-
-**Einzeiler:**
-
-```bash
-bash -c "$(curl -fsSL https://github.com/CrazyJimPro/scripte/main/portainer/portainer.sh)"
-```
+  ```bash
+  docker rm watchtower
+  ```
 
 ---
 
-### Pi-hole
+## ⚠️ Hinweise
 
-Installiert **Pi-hole** als Netzwerk-weiten Adblocker in Docker.
-
-**Einzeiler:**
-
-```bash
-bash -c "$(curl -fsSL https://github.com/CrazyJimPro/scripte/main/pihole/pihole.sh)"
-```
+* Standardmäßig überwacht Watchtower **alle Container**.
+* Falls nur bestimmte Container aktualisiert werden sollen, können deren Namen im Script am Ende angegeben werden.
+* Stelle sicher, dass `/var/run/docker.sock` gemountet wird, sonst funktioniert der Zugriff nicht.
 
 ---
 
-## Hinweise
+## 📜 Lizenz
 
-* Jedes Skript ist **autark** und kann unabhängig ausgeführt werden.
-* Logs und Status der Container lassen sich mit `docker ps` und `docker logs <container>` prüfen.
-* Weitere Skripte werden nach und nach ergänzt.
+MIT License – frei zur Nutzung und Anpassung.
 
 ```
 
 ---
 
-👉 Soll ich die Struktur so machen, dass du nur den **Ordnernamen + Skriptname eintragen** musst, damit es konsistent bleibt, falls du später neue Scripts hinzufügst?
+👉 Soll ich dir dieses **README-Template direkt generalisieren**, sodass du es einfach kopieren und nur Name, Features, Ports und Einzeiler anpassen musst für jedes deiner weiteren Skripte?
 ```
