@@ -33,11 +33,10 @@ Watchtower überprüft regelmäßig alle Docker-Container auf Updates und aktual
 ```
 
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/<BENUTZERNAME>/scripte/main/watchtower/watchtower-setup.sh)"
-
+---
 
 *(ersetze `<BENUTZERNAME>` durch deinen GitHub-Benutzernamen)*
 
----
 
 ## 📂 Projektstruktur
 
@@ -55,20 +54,20 @@ watchtower/
 * Logs anzeigen:
 
 ```
-  docker logs -f watchtower
+docker logs -f watchtower
 ```
 
 * Container stoppen:
 
-  ```bash
+```
   docker stop watchtower
-  ```
+```
 
 * Container entfernen:
 
-  ```bash
+```
   docker rm watchtower
-  ```
+```
 
 ---
 
