@@ -1,8 +1,3 @@
-Sehr cool 🤝 jetzt sehe ich, wie du dir die einzelnen `README.md`-Dateien vorstellst: mit Badges, Quick Start, Features usw.
-
-Hier ist die **angepasste Version für dein Watchtower-Skript**, im exakt gleichen Stil wie dein `authentik-setup`:
-
-````markdown
 # Watchtower Setup Script for Raspberry Pi / Linux
 
 [![Docker](https://img.shields.io/badge/Docker-✔-2496ED?logo=docker&logoColor=white)](https://www.docker.com/) 
@@ -35,9 +30,10 @@ Watchtower überprüft regelmäßig alle Docker-Container auf Updates und aktual
 
 ### 2. Installation mit Einzeiler
 
-```bash
+```
+bash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/<BENUTZERNAME>/scripte/main/watchtower/watchtower.sh)"
-````
+
 
 *(ersetze `<BENUTZERNAME>` durch deinen GitHub-Benutzernamen)*
 
