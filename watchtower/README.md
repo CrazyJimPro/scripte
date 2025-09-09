@@ -43,10 +43,10 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/<BENUTZERNAME>/scripte/m
 
 Nach der Installation wird lediglich der Container erstellt:
 
-```
+---
+
 watchtower/
-└── watchtower-setup.sh      # Installationsskript
-```
+└── watchtower.sh      # Installationsskript
 
 ---
 
@@ -54,9 +54,9 @@ watchtower/
 
 * Logs anzeigen:
 
-  ```bash
+```
   docker logs -f watchtower
-  ```
+```
 
 * Container stoppen:
 
