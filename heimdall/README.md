@@ -77,8 +77,3 @@ docker compose up -d
 ✨ Fertig – dein Heimdall Dashboard läuft jetzt!
 
 ```
-
----
-
-👉 Soll ich dir diese `README.md` auch gleich als fertige Datei im GitHub-Repo unter `scripte/heimdall/README.md` ablegen, so wie bei Authentik und den anderen?
-```
