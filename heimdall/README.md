@@ -17,23 +17,23 @@ heimdall/
 ├── config/                # Konfigurationsordner von Heimdall
 ├── docker-compose.yml     # Docker Compose Datei
 └── heimdall-setup.sh      # Setup-Skript
----
 
+---
 
 
 ## ⚙️ Installation
 
 1. Repository klonen oder nur das Script verwenden:
-   ```bash
+```
    git clone https://github.com/CrazyJimPro/scripte.git
    cd scripte/heimdall
 ````
 
 2. Setup-Skript starten:
 
-   ```bash
+```
    bash heimdall-setup.sh
-   ```
+```
 
    Oder als **Einzeiler direkt von GitHub**:
 
