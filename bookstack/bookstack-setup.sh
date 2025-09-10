@@ -20,7 +20,6 @@ MYSQL_PASSWORD=$(openssl rand -hex 16)
 
 # BookStack App
 APP_URL=http://$(hostname -I | awk '{print $1}'):6875
-APP_KEY=$(openssl rand -hex 32)
 EOF
 fi
 
@@ -36,26 +35,29 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    command: --default-authentication-plugin=mysql_native_password
     volumes:
       - ./mysql:/var/lib/mysql
 
   bookstack:
-    image: solidnerd/bookstack:latest
+    image: lscr.io/linuxserver/bookstack:latest
     container_name: bookstack
     restart: unless-stopped
     environment:
-      DB_HOST: db
-      DB_DATABASE: ${MYSQL_DATABASE}
-      DB_USERNAME: ${MYSQL_USER}
-      DB_PASSWORD: ${MYSQL_PASSWORD}
-      APP_URL: ${APP_URL}
-      APP_KEY: ${APP_KEY}
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Berlin
+      - DB_HOST=db
+      - DB_USER=${MYSQL_USER}
+      - DB_PASS=${MYSQL_PASSWORD}
+      - DB_DATABASE=${MYSQL_DATABASE}
+      - APP_URL=${APP_URL}
     depends_on:
       - db
     volumes:
-      - ./uploads:/var/www/bookstack/public/uploads
+      - ./uploads:/config
     ports:
-      - "6875:8080"
+      - "6875:80"
 EOF
 
 # Container starten
@@ -67,4 +69,3 @@ LOCAL_IP=$(hostname -I | awk '{print $1}')
 
 echo "✅ BookStack Setup abgeschlossen!"
 echo "Rufe BookStack im Browser auf unter: http://$LOCAL_IP:6875"
-
