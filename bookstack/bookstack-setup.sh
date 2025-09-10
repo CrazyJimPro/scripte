@@ -30,18 +30,6 @@ fi
 # docker-compose.yml erstellen
 cat <<'EOF' > $BASE_DIR/docker-compose.yml
 services:
-  db:
-    image: mariadb:11
-    container_name: bookstack-db
-    restart: unless-stopped
-    environment:
-      MYSQL_DATABASE: ${DB_DATABASE}
-      MYSQL_USER: ${DB_USERNAME}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-    volumes:
-      - ./db:/var/lib/mysql
-
   bookstack:
     image: lscr.io/linuxserver/bookstack:latest
     container_name: bookstack
