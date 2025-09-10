@@ -45,8 +45,6 @@ services:
       - ./uploads:/config
     ports:
       - "6875:80"
-    depends_on:
-      - db
 EOF
 
 # Container starten
