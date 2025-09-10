@@ -42,7 +42,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/<BENUTZERNAME>/scripte/m
 
 Nach der Installation wird lediglich der Container erstellt:
 
----
+```
 
 watchtower/
 └── watchtower.sh      # Installationsskript
