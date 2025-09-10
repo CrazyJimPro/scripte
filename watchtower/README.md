@@ -33,7 +33,7 @@ Watchtower überprüft regelmäßig alle Docker-Container auf Updates und aktual
 ```
 
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/<BENUTZERNAME>/scripte/main/watchtower/watchtower-setup.sh)"
----
+```
 
 *(ersetze `<BENUTZERNAME>` durch deinen GitHub-Benutzernamen)*
 
