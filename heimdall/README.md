@@ -11,16 +11,15 @@ Heimdall ist ein eleganter **Application Dashboard** für deine selbstgehosteten
 
 ## 📂 Projektstruktur
 
-----
 
+---
 heimdall/
 ├── config/                # Konfigurationsordner von Heimdall
 ├── docker-compose.yml     # Docker Compose Datei
 └── heimdall-setup.sh      # Setup-Skript
-
-````
-
 ---
+
+
 
 ## ⚙️ Installation
 
