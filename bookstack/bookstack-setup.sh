@@ -7,19 +7,23 @@ BASE_DIR=$(pwd)
 echo "📁 Erstelle Projektstruktur unter: $BASE_DIR"
 
 # Verzeichnisse
-mkdir -p $BASE_DIR/{mysql,uploads}
+mkdir -p $BASE_DIR/{db,uploads}
 
 # .env Datei mit Standardwerten
 if [ ! -f "$BASE_DIR/.env" ]; then
-cat <<EOF > $BASE_DIR/.env
-# BookStack MySQL
-MYSQL_ROOT_PASSWORD=$(openssl rand -hex 16)
-MYSQL_DATABASE=bookstack
-MYSQL_USER=bookstack
-MYSQL_PASSWORD=$(openssl rand -hex 16)
+    echo "⚙️  Generiere APP_KEY..."
+    APP_KEY=$(docker run -it --rm --entrypoint /bin/bash lscr.io/linuxserver/bookstack:latest appkey | tr -d '\r\n')
 
-# BookStack App
-APP_URL=http://$(hostname -I | awk '{print $1}'):6875
+    cat <<EOF > $BASE_DIR/.env
+# BookStack Konfiguration
+APP_URL=http://localhost:6875
+APP_KEY=$APP_KEY
+
+# Datenbank
+DB_HOST=db
+DB_DATABASE=bookstack
+DB_USERNAME=bookstack
+DB_PASSWORD=$(openssl rand -hex 16)
 EOF
 fi
 
@@ -27,37 +31,34 @@ fi
 cat <<'EOF' > $BASE_DIR/docker-compose.yml
 services:
   db:
-    image: mysql:8
+    image: mariadb:11
     container_name: bookstack-db
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-    command: --default-authentication-plugin=mysql_native_password
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
     volumes:
-      - ./mysql:/var/lib/mysql
+      - ./db:/var/lib/mysql
 
   bookstack:
     image: lscr.io/linuxserver/bookstack:latest
     container_name: bookstack
     restart: unless-stopped
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Berlin
-      - DB_HOST=db
-      - DB_USER=${MYSQL_USER}
-      - DB_PASS=${MYSQL_PASSWORD}
-      - DB_DATABASE=${MYSQL_DATABASE}
-      - APP_URL=${APP_URL}
-    depends_on:
-      - db
+      APP_URL: ${APP_URL}
+      APP_KEY: ${APP_KEY}
+      DB_HOST: ${DB_HOST}
+      DB_DATABASE: ${DB_DATABASE}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
     volumes:
       - ./uploads:/config
     ports:
       - "6875:80"
+    depends_on:
+      - db
 EOF
 
 # Container starten
@@ -68,4 +69,4 @@ docker compose up -d
 LOCAL_IP=$(hostname -I | awk '{print $1}')
 
 echo "✅ BookStack Setup abgeschlossen!"
-echo "Rufe BookStack im Browser auf unter: http://$LOCAL_IP:6875"
+echo "Rufe BookStack auf unter: http://$LOCAL_IP:6875"
