@@ -1,8 +1,3 @@
-Perfekt 🙌 – dann machen wir dir auch eine **schöne README.md** für dein Heimdall-Projekt, im gleichen Stil wie die anderen (inkl. Badges, Struktur, Setup & Update).
-
----
-
-```markdown
 # 🚀 Heimdall Setup
 
 [![Docker](https://img.shields.io/badge/Docker-✔-blue)](https://www.docker.com/)
@@ -16,7 +11,7 @@ Heimdall ist ein eleganter **Application Dashboard** für deine selbstgehosteten
 
 ## 📂 Projektstruktur
 
-```
+
 
 heimdall/
 ├── config/                # Konfigurationsordner von Heimdall
