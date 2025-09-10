@@ -84,8 +84,3 @@ docker logs -f watchtower
 MIT License – frei zur Nutzung und Anpassung.
 
 ```
-
----
-
-👉 Soll ich dir dieses **README-Template direkt generalisieren**, sodass du es einfach kopieren und nur Name, Features, Ports und Einzeiler anpassen musst für jedes deiner weiteren Skripte?
-```
