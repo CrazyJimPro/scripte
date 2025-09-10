@@ -11,7 +11,7 @@ Heimdall ist ein eleganter **Application Dashboard** für deine selbstgehosteten
 
 ## 📂 Projektstruktur
 
-
+---
 
 heimdall/
 ├── config/                # Konfigurationsordner von Heimdall
