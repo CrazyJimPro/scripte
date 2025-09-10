@@ -46,7 +46,6 @@ Nach der Installation wird lediglich der Container erstellt:
 
 watchtower/
 └── watchtower.sh      # Installationsskript
-
 ```
 
 ## 🛠️ Verwaltung
@@ -54,6 +53,7 @@ watchtower/
 * Logs anzeigen:
 
 ```
+
 docker logs -f watchtower
 ```
 
