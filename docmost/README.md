@@ -85,8 +85,3 @@ Dein Docmost-Setup ist jetzt einsatzbereit.
 Rufe es einfach im Browser auf und lege direkt los!
 
 ```
-
----
-
-Soll ich dir die fertige **README.md** auch gleich so vorbereiten, dass sie automatisch mit im Script angelegt wird (wie `.env` & `docker-compose.yml`), oder willst du sie nur auf GitHub nutzen?
-```
