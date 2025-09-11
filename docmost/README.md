@@ -17,9 +17,9 @@ Alle benötigten Dateien (`.env`, `docker-compose.yml`) werden automatisch erste
 
 Führe einfach folgenden Einzeiler im gewünschten Verzeichnis aus:
 
-```bash
+```
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/CrazyJimPro/scripte/main/docmost/docmost-setup.sh)"
-
+````
 Das Skript erledigt für dich:
 
 * Erstellen der Projektstruktur (`data`, `db_data`, `redis_data`)
