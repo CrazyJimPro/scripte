@@ -1,6 +1,3 @@
-Perfekt 👍 hier eine saubere **README.md** für dein `docmost-setup.sh` im selben Stil wie die anderen:
-
-````markdown
 # 🚀 Docmost Setup mit Docker
 
 Dieses Repository enthält ein Bash-Skript, um **Docmost** mit PostgreSQL und Redis schnell und einfach in Docker bereitzustellen.  
@@ -22,7 +19,6 @@ Führe einfach folgenden Einzeiler im gewünschten Verzeichnis aus:
 
 ```bash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/CrazyJimPro/scripte/main/docmost/docmost-setup.sh)"
-````
 
 Das Skript erledigt für dich:
 
