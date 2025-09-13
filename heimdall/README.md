@@ -20,21 +20,7 @@ heimdall/
 ````
 
 
-## ⚙️ Installation
-
-1. Repository klonen oder nur das Script verwenden:
-```
-   git clone https://github.com/CrazyJimPro/scripte.git
-   cd scripte/heimdall
-````
-
-2. Setup-Skript starten:
-
-```
-   bash heimdall-setup.sh
-```
-
-   Oder als **Einzeiler direkt von GitHub**:
+## ⚙️ Installation mit Einzeiler
 
    ```bash
    bash -c "$(curl -fsSL https://raw.githubusercontent.com/CrazyJimPro/scripte/main/heimdall/heimdall-setup.sh)"
