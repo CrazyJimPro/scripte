@@ -36,17 +36,16 @@ Es eignet sich besonders für den Einsatz auf einem **Raspberry Pi 5** oder jede
 ```
 
 bash
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/<BENUTZERNAME>/bitwardenrs-setup/main/bitwardenrs-setup.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/CrazyJimPro/scripte/main/bitwarden/bitwardenrs-setup.sh)"
 ````
 
 👉 Installation mit einer bestimmten Version (z. B. `1.32.0`):
 
 ```
 bash
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/<BENUTZERNAME>/bitwardenrs-setup/main/bitwardenrs-setup.sh)" 1.32.0
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/CrazyJimPro/scripte/main/bitwarden/bitwardenrs-setup.sh)" 1.32.0
 ```
 
-*(ersetze `<BENUTZERNAME>` durch deinen GitHub-Benutzernamen)*
 
 ---
 
@@ -127,9 +126,4 @@ http://192.168.178.50:8088/admin
 
 MIT License – frei zur Nutzung und Anpassung.
 
-```
-
----
-
-👉 Soll ich dir dazu auch gleich das **passende `bitwardenrs-setup.sh` Script** erstellen, das dieselben Vorteile wie das Authentik-Skript hat (Versionen, `.env`, automatische Ordnerstruktur, Admin-Token etc.)?
 ```
