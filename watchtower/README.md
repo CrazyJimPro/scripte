@@ -82,5 +82,3 @@ docker logs -f watchtower
 ## 📜 Lizenz
 
 MIT License – frei zur Nutzung und Anpassung.
-
-```
