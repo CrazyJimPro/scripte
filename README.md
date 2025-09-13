@@ -30,7 +30,7 @@ Beispiel für die Ausführung eines Scripts (z. B. Docmost):
 
 ```bash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/CrazyJimPro/scripte/main/docmost/docmost-setup.sh)"
-
+```
 
 Nach der Ausführung:
 
