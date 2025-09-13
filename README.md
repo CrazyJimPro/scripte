@@ -29,7 +29,7 @@ Alle Skripte folgen dem gleichen Aufbau, sodass du deine Services mit **einem ei
 Beispiel für die Ausführung eines Scripts (z. B. Docmost):
 
 ```bash
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/<dein-github-user>/scripte/main/docmost/docmost-setup.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/CrazyJimPro/scripte/main/docmost/docmost-setup.sh)"
 
 
 Nach der Ausführung:
