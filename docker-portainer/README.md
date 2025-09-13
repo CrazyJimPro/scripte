@@ -82,8 +82,3 @@ docker run -d \
 Dieses Projekt steht unter der **MIT Lizenz**.
 
 ```
-
----
-
-👉 Soll ich dir im `README` noch zusätzlich eine **Compose-Variante für Portainer** (als Alternative zur `docker run` Variante) mit aufnehmen? Dann hättest du alles an einer Stelle dokumentiert.
-```
