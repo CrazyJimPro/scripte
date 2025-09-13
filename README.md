@@ -62,8 +62,3 @@ Diese Sammlung soll dir helfen, schnell und unkompliziert verschiedene **Selfhos
 Neue Skripte können einfach ergänzt werden.
 
 ```
-
----
-
-👉 Soll ich die **README.md** so gestalten, dass die Script-Liste automatisch mit deinem Repo synchronisiert werden kann (z. B. per `ls */*-setup.sh` im Script generieren), oder lieber eine **statische Liste** wie oben, die du manuell pflegst?
-```
