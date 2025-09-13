@@ -83,5 +83,3 @@ Die relevanten Daten liegen in folgenden Ordnern und sollten regelmäßig gesich
 
 Dein Docmost-Setup ist jetzt einsatzbereit.
 Rufe es einfach im Browser auf und lege direkt los!
-
-```
