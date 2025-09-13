@@ -34,17 +34,16 @@ Es eignet sich besonders für den Einsatz auf einem **Raspberry Pi 5** oder jede
 👉 Installation mit der neuesten Version (`latest`):
 
 ```bash
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/<BENUTZERNAME>/authentik-setup/main/authentik-setup.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/CrazyJimPro/scripte/main/authentik/authentik-setup.sh)"
 
 ````
 
 👉 Installation mit einer bestimmten Version (z. B. `2025.8.1`):
 
 ```bash
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/<BENUTZERNAME>/authentik-setup/main/authentik-setup.sh)" 2025.8.1
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/CrazyJimPro/scripte/main/authentik/authentik-setup.sh)" 2025.8.1
 ```
 
-*(ersetze `<BENUTZERNAME>` durch deinen GitHub-Benutzernamen)*
 
 ---
 
