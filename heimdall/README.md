@@ -61,5 +61,3 @@ docker compose up -d
 ---
 
 ✨ Fertig – dein Heimdall Dashboard läuft jetzt!
-
-```
