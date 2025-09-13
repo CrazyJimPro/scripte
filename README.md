@@ -1,15 +1,3 @@
-Alles klar 👍 – ich mach dir eine **einfache README.md** für dein `scripte`-Repo.
-Da wir schon einige zusammen erstellt haben, liste ich die bisherigen auf:
-
-* **authentik-setup.sh** → Installation von [Authentik](https://goauthentik.io/) mit PostgreSQL & Redis
-* **pihole-setup.sh** → Installation von [Pi-hole](https://pi-hole.net/) im Docker Container
-* **heimdall-setup.sh** → Installation von [Heimdall Dashboard](https://heimdall.site/)
-* **bookstack-setup.sh** → Installation von [Bookstack](https://www.bookstackapp.com/) (ARM64 kompatibel)
-* **docmost-setup.sh** → Installation von [Docmost](https://github.com/docmost/docmost) mit PostgreSQL & Redis
-
-Hier der Vorschlag:
-
-````markdown
 # 📦 Script-Sammlung (Docker Setups)
 
 Dieses Repository enthält eine Sammlung von **Bash-Skripten**, die automatisch Docker-Container mit den passenden **docker-compose.yml** und `.env`-Dateien erstellen.  
@@ -42,7 +30,7 @@ Beispiel für die Ausführung eines Scripts (z. B. Docmost):
 
 ```bash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/<dein-github-user>/scripte/main/docmost/docmost-setup.sh)"
-````
+
 
 Nach der Ausführung:
 
