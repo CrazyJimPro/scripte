@@ -1,101 +1,81 @@
-# 🚀 Docker + Docker Compose + Portainer Installer
+Alles klar 👍 – ich mach dir eine **einfache README.md** für dein `scripte`-Repo.
+Da wir schon einige zusammen erstellt haben, liste ich die bisherigen auf:
 
-Dieses Repository enthält ein Bash-Skript zur automatischen Installation von:
+* **authentik-setup.sh** → Installation von [Authentik](https://goauthentik.io/) mit PostgreSQL & Redis
+* **pihole-setup.sh** → Installation von [Pi-hole](https://pi-hole.net/) im Docker Container
+* **heimdall-setup.sh** → Installation von [Heimdall Dashboard](https://heimdall.site/)
+* **bookstack-setup.sh** → Installation von [Bookstack](https://www.bookstackapp.com/) (ARM64 kompatibel)
+* **docmost-setup.sh** → Installation von [Docmost](https://github.com/docmost/docmost) mit PostgreSQL & Redis
 
-- [Docker](https://www.docker.com/)  
-- [Docker Compose](https://docs.docker.com/compose/) (Plugin)  
-- [Portainer](https://www.portainer.io/) als Web-UI für Docker  
-- Ein dediziertes Docker-Netzwerk (`docker`)  
+Hier der Vorschlag:
 
----
+````markdown
+# 📦 Script-Sammlung (Docker Setups)
 
-## 📋 Features
-
-- Installation von Docker über das **offizielle Repository**  
-- Automatische Installation des **Docker Compose Plugins**  
-- Erstellung eines **Docker Netzwerks** mit dem Namen `docker`  
-- Automatischer Start von **Portainer** (läuft auf Port `9000`)  
-- Aktueller Benutzer wird zur **Docker-Gruppe** hinzugefügt → kein `sudo` nötig  
+Dieses Repository enthält eine Sammlung von **Bash-Skripten**, die automatisch Docker-Container mit den passenden **docker-compose.yml** und `.env`-Dateien erstellen.  
+Alle Skripte folgen dem gleichen Aufbau, sodass du deine Services mit **einem einzigen Befehl** starten kannst. 🚀  
 
 ---
 
-## 🔧 Installation
+## 📋 Voraussetzungen
 
-1. Repository klonen oder das Script herunterladen:  
-   ```bash
-   git clone https://github.com/<dein-repo>/docker-portainer-install.git
-   cd docker-portainer-install
-
-2. Script ausführbar machen:
-
-   ```bash
-   chmod +x install_docker.sh
-   ```
-
-3. Script ausführen:
-
-   ```bash
-   ./install_docker.sh
-   ```
+- Linux/macOS Terminal mit `bash`
+- Installiertes **Docker** & **Docker Compose**
 
 ---
 
-## 🌐 Zugriff auf Portainer
+## ⚙️ Aktuell verfügbare Skripte
 
-Nach der Installation erreichst du Portainer über:
-
-```
-http://<deine-server-ip>:9000
-```
-
-👉 Beim ersten Start kannst du einen Admin-Benutzer anlegen.
-
----
-
-## ⚠️ Hinweis
-
-* Nach der Installation musst du dich **neu einloggen** oder einmal aus- und wieder einloggen, damit deine Gruppenzugehörigkeit (`docker`) aktiv wird.
-* Alternativ sofort aktivieren mit:
-
-  ```bash
-  newgrp docker
-  ```
+| Script               | Beschreibung |
+|----------------------|--------------|
+| `authentik-setup.sh` | Setup von [Authentik](https://goauthentik.io/) mit PostgreSQL & Redis |
+| `pihole-setup.sh`    | Setup von [Pi-hole](https://pi-hole.net/) im Docker Container |
+| `heimdall-setup.sh`  | Setup von [Heimdall Dashboard](https://heimdall.site/) |
+| `bookstack-setup.sh` | Setup von [Bookstack](https://www.bookstackapp.com/) (ARM64 kompatibel) |
+| `docmost-setup.sh`   | Setup von [Docmost](https://github.com/docmost/docmost) mit PostgreSQL & Redis |
 
 ---
 
-## 📦 Updates
+## ▶️ Nutzung
 
-### Docker & Compose updaten
+Beispiel für die Ausführung eines Scripts (z. B. Docmost):
 
 ```bash
-sudo apt-get update && sudo apt-get upgrade -y
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/<dein-github-user>/scripte/main/docmost/docmost-setup.sh)"
+````
+
+Nach der Ausführung:
+
+* werden automatisch alle benötigten Ordner erstellt
+* eine `.env` mit zufälligen Passwörtern & Keys angelegt
+* die Container gestartet (`docker compose up -d`)
+
+---
+
+## 📂 Struktur
+
+Jedes Setup-Script erstellt seine eigene Projektstruktur, z. B. für Docmost:
+
 ```
-
-### Portainer updaten
-
-```bash
-docker stop portainer
-docker rm portainer
-docker pull portainer/portainer-ce:latest
-docker run -d \
-    -p 9000:9000 \
-    --name portainer \
-    --restart=always \
-    --network docker \
-    -v /var/run/docker.sock:/var/run/docker.sock \
-    -v portainer_data:/data \
-    portainer/portainer-ce:latest
+docmost/
+├── data/
+├── db_data/
+├── redis_data/
+├── .env
+├── docker-compose.yml
+└── docmost-setup.sh
 ```
 
 ---
 
-## 📝 Lizenz
+## ✅ Ziel
 
-Dieses Projekt steht unter der **MIT Lizenz**.
+Diese Sammlung soll dir helfen, schnell und unkompliziert verschiedene **Selfhosted Services** mit Docker einzurichten.
+Neue Skripte können einfach ergänzt werden.
 
 ```
 
 ---
 
-👉 Soll ich dir im `README` noch zusätzlich eine **Compose-Variante für Portainer** (als Alternative zur `docker run` Variante) mit aufnehmen? Dann hättest du alles an einer Stelle dokumentiert.
+👉 Soll ich die **README.md** so gestalten, dass die Script-Liste automatisch mit deinem Repo synchronisiert werden kann (z. B. per `ls */*-setup.sh` im Script generieren), oder lieber eine **statische Liste** wie oben, die du manuell pflegst?
 ```
