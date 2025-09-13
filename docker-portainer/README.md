@@ -21,22 +21,10 @@ Dieses Repository enthält ein Bash-Skript zur automatischen Installation von:
 
 ## 🔧 Installation
 
-1. Repository klonen oder das Script herunterladen:  
-   ```bash
-   git clone https://github.com/<dein-repo>/docker-portainer-install.git
-   cd docker-portainer-install
+```bash
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/CrazyJimPro/scripte/main/docker-portainer/docker-portainer_setup.sh)"
 
-2. Script ausführbar machen:
-
-   ```bash
-   chmod +x install_docker.sh
-   ```
-
-3. Script ausführen:
-
-   ```bash
-   ./install_docker.sh
-   ```
+````
 
 ---
 
