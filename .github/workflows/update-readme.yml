@@ -14,7 +14,7 @@ jobs:
 
       - name: Generate README.md
         run: |
-          chmod +x generate-readme.sh
+          chmod +x scripte/generate-readme.sh
           ./scripte/generate-readme.sh
 
       - name: Commit and push if changed
@@ -24,4 +24,3 @@ jobs:
           git add README.md
           git commit -m "Auto-update README with script list" || echo "No changes"
           git push
-
