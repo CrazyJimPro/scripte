@@ -15,7 +15,7 @@ jobs:
       - name: Generate README.md
         run: |
           chmod +x generate-readme.sh
-          scripte/generate-readme.sh
+          ./scripte/generate-readme.sh
 
       - name: Commit and push if changed
         run: |
