@@ -1,31 +1,21 @@
 #!/bin/bash
-set -e
+# Dieses Script erstellt eine README.md mit allen vorhandenen setup-Skripten.
 
-# Datei in die README geschrieben wird
-README="README.md"
+echo "# 🚀 Script-Sammlung" > README.md
+echo "" >> README.md
+echo "Dieses Repository enthält verschiedene Setup-Skripte für Docker-Anwendungen." >> README.md
+echo "" >> README.md
+echo "## 📂 Verfügbare Skripte" >> README.md
+echo "" >> README.md
 
-# Header
-cat <<EOF > $README
-# 🐧 Script-Sammlung
-
-Dieses Repository enthält verschiedene **Setup-Skripte**, um Anwendungen schnell mit Docker Compose zu installieren und zu starten.  
-Jedes Setup liegt in einem eigenen Unterordner.
-
-## 📂 Vorhandene Skripte
-EOF
-
-# Alle *-setup.sh Dateien auflisten
+# Alle setup.sh Dateien in scripte/*/ auflisten
 find scripte -type f -name "*-setup.sh" | sort | while read -r script; do
   name=$(basename "$script")
-  dir=$(basename "$(dirname "$script")")
-  echo "- [$dir]($script) – Setup-Skript für **$dir**" >> $README
+  dir=$(dirname "$script" | sed 's|scripte/||')
+  echo "- **$dir** → \`$name\`" >> README.md
 done
 
-# Footer
-cat <<EOF >> $README
-
-## ⚡ Automatische Aktualisierung
-Die README wird automatisch bei jedem Commit aktualisiert (via GitHub Actions Workflow im Ordner \`.github/workflows/\`).
-
-EOF
-
+echo "" >> README.md
+echo "## 🔄 Automatische Aktualisierung" >> README.md
+echo "" >> README.md
+echo "Die README.md wird bei jedem Push automatisch aktualisiert, damit sie immer alle vorhandenen Skripte auflistet." >> README.md
