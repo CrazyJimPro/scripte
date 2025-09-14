@@ -1,3 +1,8 @@
+Sehr gute Idee 👍 – dann erweitern wir dein `README.md` für Watchtower um eine kleine **Übersicht der wichtigsten Environment-Variablen**, damit man direkt sieht, welche Optionen es gibt.
+
+Hier die aktualisierte Version:
+
+````markdown
 # Watchtower Setup Script for Raspberry Pi / Linux
 
 [![Docker](https://img.shields.io/badge/Docker-✔-2496ED?logo=docker&logoColor=white)](https://www.docker.com/) 
@@ -30,44 +35,61 @@ Watchtower überprüft regelmäßig alle Docker-Container auf Updates und aktual
 
 ### 2. Installation mit Einzeiler
 
-```
-
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/<BENUTZERNAME>/scripte/main/watchtower/watchtower-setup.sh)"
-```
+```bash
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/<BENUTZERNAME>/scripte/main/watchtower/watchtower.sh)"
+````
 
 *(ersetze `<BENUTZERNAME>` durch deinen GitHub-Benutzernamen)*
 
+---
 
 ## 📂 Projektstruktur
 
 Nach der Installation wird lediglich der Container erstellt:
 
 ```
-
 watchtower/
 └── watchtower.sh      # Installationsskript
 ```
+
+---
 
 ## 🛠️ Verwaltung
 
 * Logs anzeigen:
 
-```
-
-docker logs -f watchtower
-```
+  ```bash
+  docker logs -f watchtower
+  ```
 
 * Container stoppen:
 
-```
+  ```bash
   docker stop watchtower
-```
+  ```
 
 * Container entfernen:
 
-```
+  ```bash
   docker rm watchtower
-```
+  ```
+
+---
+
+## ⚙️ Häufig genutzte Environment-Variablen
+
+| Variable                     | Beschreibung                                                                  |
+| ---------------------------- | ----------------------------------------------------------------------------- |
+| `WATCHTOWER_CLEANUP`         | Entfernt alte Images nach einem Update (`true/false`)                         |
+| `WATCHTOWER_SCHEDULE`        | Cron-Syntax für Update-Intervalle (z. B. `0 0 4 * * *` für 04:00 Uhr täglich) |
+| `WATCHTOWER_POLL_INTERVAL`   | Zeit in Sekunden zwischen Update-Checks (Alternative zu `--interval`)         |
+| `WATCHTOWER_INCLUDE_STOPPED` | Bezieht auch gestoppte Container in Updates ein                               |
+| `WATCHTOWER_MONITOR_ONLY`    | Nur prüfen, keine Updates durchführen (`true/false`)                          |
+
+👉 Standardmäßig nutzt dein Script:
+
+* `WATCHTOWER_CLEANUP=true`
+* `--interval 18000` (alle 5 Stunden)
 
 ---
 
@@ -82,3 +104,10 @@ docker logs -f watchtower
 ## 📜 Lizenz
 
 MIT License – frei zur Nutzung und Anpassung.
+
+```
+
+---
+
+👉 Soll ich dir die Tabelle so machen, dass auch **Beispiele** drinstehen (z. B. ein Beispiel für `WATCHTOWER_SCHEDULE` mit Cron-Syntax)?
+```
