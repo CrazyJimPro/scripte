@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+echo "Starte README-Generierung..."
+
 # README Header
 cat <<EOF > README.md
 # 🚀 Script-Sammlung
@@ -10,7 +12,11 @@ Dieses Repository enthält verschiedene Setup-Skripte für Docker-Anwendungen.
 ## 📂 Verfügbare Skripte
 EOF
 
-# Alle setup.sh Skripte in scripte/*/* finden und auflisten
+# Debug: Welche Dateien findet er?
+echo "Gefundene Scripts:" >&2
+find scripte -type f -name "*-setup.sh" -print >&2
+
+# Liste in README schreiben
 find scripte -type f -name "*-setup.sh" | sort | while read -r script; do
     script_name=$(basename "$script")
     folder_name=$(basename "$(dirname "$script")")
