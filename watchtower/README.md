@@ -1,8 +1,3 @@
-Sehr gute Idee 👍 – dann erweitern wir dein `README.md` für Watchtower um eine kleine **Übersicht der wichtigsten Environment-Variablen**, damit man direkt sieht, welche Optionen es gibt.
-
-Hier die aktualisierte Version:
-
-````markdown
 # Watchtower Setup Script for Raspberry Pi / Linux
 
 [![Docker](https://img.shields.io/badge/Docker-✔-2496ED?logo=docker&logoColor=white)](https://www.docker.com/) 
@@ -37,7 +32,7 @@ Watchtower überprüft regelmäßig alle Docker-Container auf Updates und aktual
 
 ```bash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/<BENUTZERNAME>/scripte/main/watchtower/watchtower.sh)"
-````
+
 
 *(ersetze `<BENUTZERNAME>` durch deinen GitHub-Benutzernamen)*
 
