@@ -14,8 +14,6 @@ scripte/beszel/
 └── beszel/              # Persistente Daten (Volume)
 
 
----
-
 ## ⚡ Installation
 
 Kopiere und führe den folgenden Einzeiler aus:
