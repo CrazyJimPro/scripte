@@ -101,8 +101,3 @@ watchtower/
 MIT License – frei zur Nutzung und Anpassung.
 
 ```
-
----
-
-👉 Soll ich dir die Tabelle so machen, dass auch **Beispiele** drinstehen (z. B. ein Beispiel für `WATCHTOWER_SCHEDULE` mit Cron-Syntax)?
-```
