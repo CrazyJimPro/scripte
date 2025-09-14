@@ -1,21 +1,26 @@
 #!/bin/bash
-# Dieses Script erstellt eine README.md mit allen vorhandenen setup-Skripten.
+set -e
 
-echo "# 🚀 Script-Sammlung" > README.md
-echo "" >> README.md
-echo "Dieses Repository enthält verschiedene Setup-Skripte für Docker-Anwendungen." >> README.md
-echo "" >> README.md
-echo "## 📂 Verfügbare Skripte" >> README.md
-echo "" >> README.md
+# README Header
+cat <<EOF > README.md
+# 🚀 Script-Sammlung
 
-# Alle setup.sh Dateien in scripte/*/ auflisten
+Dieses Repository enthält verschiedene Setup-Skripte für Docker-Anwendungen.
+
+## 📂 Verfügbare Skripte
+EOF
+
+# Alle setup.sh Skripte in scripte/*/* finden und auflisten
 find scripte -type f -name "*-setup.sh" | sort | while read -r script; do
-  name=$(basename "$script")
-  dir=$(dirname "$script" | sed 's|scripte/||')
-  echo "- **$dir** → \`$name\`" >> README.md
+    script_name=$(basename "$script")
+    folder_name=$(basename "$(dirname "$script")")
+    echo "- **$folder_name** → \`$script_name\`" >> README.md
 done
 
-echo "" >> README.md
-echo "## 🔄 Automatische Aktualisierung" >> README.md
-echo "" >> README.md
-echo "Die README.md wird bei jedem Push automatisch aktualisiert, damit sie immer alle vorhandenen Skripte auflistet." >> README.md
+# Footer
+cat <<EOF >> README.md
+
+## 🔄 Automatische Aktualisierung
+
+Die README.md wird bei jedem Push automatisch aktualisiert, damit sie immer alle vorhandenen Skripte auflistet.
+EOF
