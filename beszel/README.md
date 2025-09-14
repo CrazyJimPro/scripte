@@ -1,10 +1,3 @@
-Sehr gut 👍, dann machen wir eine **README.md speziell für dein Beszel-Script**, im selben Stil wie die anderen (z. B. Authentik, Outline).
-
----
-
-## 📄 README für `scripte/beszel/beszel-setup.sh`
-
-```markdown
 # 📊 Beszel Setup Script
 
 Dieses Script installiert und startet [Beszel](https://github.com/henrygd/beszel), eine leichtgewichtige Monitoring-Lösung für deine Server und Container.
@@ -20,7 +13,6 @@ scripte/beszel/
 ├── docker-compose.yml   # Compose Datei (wird automatisch erstellt)
 └── beszel/              # Persistente Daten (Volume)
 
-````
 
 ---
 
