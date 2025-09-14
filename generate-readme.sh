@@ -1,10 +1,17 @@
 #!/bin/bash
 set -e
 
-echo "Starte README-Generierung..."
+README_FILE="README.md"
 
-# README Header
-cat <<EOF > README.md
+# Debug-Ausgabe, damit du im Workflow siehst, was gefunden wird
+echo "🔎 Suche nach Setup-Scripten im Ordner 'scripte/'..."
+SCRIPTS=$(find scripte -type f -name "*-setup.sh" | sort)
+
+echo "Gefundene Scripts:"
+echo "$SCRIPTS" | sed 's/^/ - /'
+
+# README.md neu schreiben
+cat > $README_FILE <<EOF
 # 🚀 Script-Sammlung
 
 Dieses Repository enthält verschiedene Setup-Skripte für Docker-Anwendungen.
@@ -12,21 +19,23 @@ Dieses Repository enthält verschiedene Setup-Skripte für Docker-Anwendungen.
 ## 📂 Verfügbare Skripte
 EOF
 
-# Debug: Welche Dateien findet er?
-echo "Gefundene Scripts:" >&2
-find scripte -type f -name "*-setup.sh" -print >&2
+if [ -z "$SCRIPTS" ]; then
+  echo "" >> $README_FILE
+  echo "_(Noch keine Skripte gefunden)_" >> $README_FILE
+else
+  echo "" >> $README_FILE
+  for script in $SCRIPTS; do
+    NAME=$(basename "$script")
+    DIR=$(dirname "$script")
+    echo "- [$NAME]($script) – in \`$DIR\`" >> $README_FILE
+  done
+fi
 
-# Liste in README schreiben
-find scripte -type f -name "*-setup.sh" | sort | while read -r script; do
-    script_name=$(basename "$script")
-    folder_name=$(basename "$(dirname "$script")")
-    echo "- **$folder_name** → \`$script_name\`" >> README.md
-done
-
-# Footer
-cat <<EOF >> README.md
+cat >> $README_FILE <<EOF
 
 ## 🔄 Automatische Aktualisierung
 
-Die README.md wird bei jedem Push automatisch aktualisiert, damit sie immer alle vorhandenen Skripte auflistet.
+Die \`README.md\` wird bei jedem Push automatisch aktualisiert, damit sie immer alle vorhandenen Skripte auflistet.
 EOF
+
+echo "✅ README.md erfolgreich aktualisiert!"
