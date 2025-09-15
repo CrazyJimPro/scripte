@@ -35,14 +35,13 @@ Es eignet sich besonders für den Einsatz auf einem **Raspberry Pi 5** oder jede
 
 ```
 
-bash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/CrazyJimPro/scripte/main/bitwarden/bitwardenrs-setup.sh)"
 ````
 
 👉 Installation mit einer bestimmten Version (z. B. `1.32.0`):
 
 ```
-bash
+
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/CrazyJimPro/scripte/main/bitwarden/bitwardenrs-setup.sh)" 1.32.0
 ```
 
