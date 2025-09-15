@@ -98,4 +98,3 @@ watchtower/
 
 MIT License – frei zur Nutzung und Anpassung.
 
-```
