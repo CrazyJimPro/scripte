@@ -22,7 +22,7 @@ Dieses Repository enthält ein Bash-Skript zur automatischen Installation von:
 ## 🔧 Installation mit Einzeiler
 
 ```bash
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/CrazyJimPro/scripte/main/docker-portainer/docker-portainer_setup.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/CrazyJimPro/scripte/main/docker-portainer/docker_portainer_setup.sh)"
 
 ````
 
