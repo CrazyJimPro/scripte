@@ -126,4 +126,3 @@ http://192.168.178.50:8088/admin
 
 MIT License – frei zur Nutzung und Anpassung.
 
-```
