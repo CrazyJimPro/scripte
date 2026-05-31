@@ -16,20 +16,28 @@ if ! docker compose version >/dev/null 2>&1; then
     exit 1
 fi
 
-PROJECT_DIR="homarr"
+# OpenSSL prüfen
+if ! command -v openssl >/dev/null 2>&1; then
+    echo "❌ OpenSSL ist nicht installiert."
+    exit 1
+fi
+
+BASE_DIR="/home/chris/docker"
+APP_NAME="homarr"
+PROJECT_DIR="${BASE_DIR}/${APP_NAME}"
 
 echo "📁 Erstelle Projektordner..."
-mkdir -p "$PROJECT_DIR/homarr/appdata"
+mkdir -p "$PROJECT_DIR/appdata"
 
 cd "$PROJECT_DIR"
 
-# Proxy Netzwerk prüfen
+echo "🌐 Prüfe Docker Netzwerk 'proxy'..."
+
 if ! docker network inspect proxy >/dev/null 2>&1; then
-    echo "❌ Docker Netzwerk 'proxy' existiert nicht."
-    echo "Bitte zuerst das Netzwerk erstellen:"
-    echo ""
-    echo "docker network create proxy"
-    exit 1
+    echo "📦 Netzwerk 'proxy' existiert nicht. Erstelle es..."
+    docker network create proxy
+else
+    echo "✅ Netzwerk 'proxy' bereits vorhanden."
 fi
 
 echo "🔐 Generiere SECRET_ENCRYPTION_KEY..."
@@ -52,7 +60,7 @@ services:
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./homarr/appdata:/appdata
+      - /home/chris/docker/homarr/appdata:/appdata
     environment:
       - SECRET_ENCRYPTION_KEY=${SECRET_ENCRYPTION_KEY}
     networks:
@@ -73,6 +81,9 @@ LOCAL_IP=$(hostname -I | awk '{print $1}')
 
 echo ""
 echo "✅ Homarr wurde erfolgreich installiert!"
+echo ""
+echo "📁 Installationspfad:"
+echo "$PROJECT_DIR"
 echo ""
 echo "🌐 Zugriff:"
 echo "http://$LOCAL_IP:7575"
