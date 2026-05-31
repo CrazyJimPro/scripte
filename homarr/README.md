@@ -2,9 +2,7 @@
 
 Dieses Repository enthält ein Bash-Skript, um Homarr schnell und einfach in Docker bereitzustellen.
 
-Alle benötigten Dateien und Ordner werden automatisch erstellt.
-
-Ein sicherer SECRET_ENCRYPTION_KEY wird automatisch generiert und in einer .env-Datei gespeichert.
+Ein sicherer `SECRET_ENCRYPTION_KEY` wird automatisch generiert und in einer `.env` gespeichert.
 
 ---
 
@@ -12,14 +10,14 @@ Ein sicherer SECRET_ENCRYPTION_KEY wird automatisch generiert und in einer .env-
 
 - Installiertes Docker
 - Installiertes Docker Compose
-- Linux/macOS mit bash
-- Vorhandenes Docker Netzwerk "proxy"
+- Installiertes OpenSSL
+- Linux mit bash
 
 ---
 
 ## ⚙️ Installation
 
-Führe einfach folgenden Einzeiler im gewünschten Verzeichnis aus:
+Führe einfach folgenden Einzeiler aus:
 
 ```bash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/CrazyJimPro/scripte/main/homarr/homarr-setup.sh)"
@@ -29,10 +27,12 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/CrazyJimPro/scripte/main
 
 ## 🛠️ Das Skript erledigt automatisch
 
-- Erstellen der Projektstruktur
-- Generieren eines SECRET_ENCRYPTION_KEY
-- Erstellen einer .env-Datei
-- Erstellen der docker-compose.yml
+- Erstellen des Ordners `/home/chris/docker/homarr`
+- Erstellen des Datenordners
+- Generieren eines sicheren `SECRET_ENCRYPTION_KEY`
+- Erstellen einer `.env`
+- Automatisches Anlegen des Docker-Netzwerks `proxy`
+- Generieren der `docker-compose.yml`
 - Starten des Containers
 
 ---
@@ -50,12 +50,11 @@ http://<deine-ip>:7575
 ## 📂 Projektstruktur
 
 ```text
-homarr/
-├── homarr/
-│   └── appdata/
-├── .env
-├── docker-compose.yml
-└── homarr-setup.sh
+/home/chris/docker/
+└── homarr/
+    ├── appdata/
+    ├── .env
+    └── docker-compose.yml
 ```
 
 ---
@@ -63,6 +62,7 @@ homarr/
 ## 🛑 Container stoppen
 
 ```bash
+cd /home/chris/docker/homarr
 docker compose down
 ```
 
@@ -71,18 +71,48 @@ docker compose down
 ## ▶️ Container starten
 
 ```bash
+cd /home/chris/docker/homarr
 docker compose up -d
 ```
 
 ---
 
-## 🔄 Backup
+## 🔄 Container aktualisieren
 
-Folgende Daten regelmäßig sichern:
+```bash
+cd /home/chris/docker/homarr
+
+docker compose pull
+docker compose up -d
+```
+
+---
+
+## 💾 Backup
+
+Für ein vollständiges Backup folgende Daten sichern:
 
 ```text
-homarr/appdata/
-.env
+/home/chris/docker/homarr/appdata
+/home/chris/docker/homarr/.env
+```
+
+---
+
+## 🗑️ Deinstallation
+
+Container stoppen:
+
+```bash
+cd /home/chris/docker/homarr
+
+docker compose down
+```
+
+Anschließend den Ordner entfernen:
+
+```bash
+rm -rf /home/chris/docker/homarr
 ```
 
 ---
@@ -90,3 +120,11 @@ homarr/appdata/
 ## ✅ Fertig
 
 Dein Homarr Dashboard ist jetzt einsatzbereit.
+
+Alle Daten werden dauerhaft unter
+
+```text
+/home/chris/docker/homarr
+```
+
+gespeichert und bleiben bei Container-Updates erhalten.
