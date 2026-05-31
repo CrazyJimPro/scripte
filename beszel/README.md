@@ -18,7 +18,7 @@ scripte/beszel/
 
 Kopiere und führe den folgenden Einzeiler aus:
 
-```bash
+````
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/<DEIN-USER>/<DEIN-REPO>/main/scripte/beszel/beszel-setup.sh)"
 ````
 
