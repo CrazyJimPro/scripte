@@ -121,5 +121,3 @@ Rufe den Initial Setup Wizard auf unter: http://192.168.178.50:9010/if/flow/init
 ## 📜 Lizenz
 
 MIT License – frei zur Nutzung und Anpassung.
-
-```
