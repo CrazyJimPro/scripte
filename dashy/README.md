@@ -4,20 +4,22 @@ Dieses Repository enthält ein Bash-Skript, um Dashy schnell und einfach in Dock
 
 Alle benötigten Dateien und Ordner werden automatisch erstellt.
 
+Zusätzlich wird automatisch eine Standard-`conf.yml` erzeugt, sodass Dashy direkt einsatzbereit ist.
+
 ---
 
 ## 📋 Voraussetzungen
 
 - Installiertes Docker
 - Installiertes Docker Compose
-- Linux/macOS mit bash
-- Internetzugang
+- Linux mit bash
+- Schreibrechte auf `/home/chris/docker`
 
 ---
 
 ## ⚙️ Installation
 
-Führe einfach folgenden Einzeiler im gewünschten Verzeichnis aus:
+Führe einfach folgenden Einzeiler aus:
 
 ```bash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/CrazyJimPro/scripte/main/dashy/dashy-setup.sh)"
@@ -27,9 +29,10 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/CrazyJimPro/scripte/main
 
 ## 🛠️ Das Skript erledigt automatisch
 
-- Erstellen der Projektstruktur
-- Erstellen der benötigten Datenordner
-- Generieren der docker-compose.yml
+- Erstellen des Ordners `/home/chris/docker/dashy`
+- Erstellen der Unterordner `user-data` und `icons`
+- Erzeugen einer Standard-`conf.yml`
+- Generieren der `docker-compose.yml`
 - Starten des Containers
 
 ---
@@ -47,12 +50,12 @@ http://<deine-ip>:4000
 ## 📂 Projektstruktur
 
 ```text
-dashy/
-├── dashy/
-│   ├── icons/
-│   └── conf.yml
-├── docker-compose.yml
-└── dashy-setup.sh
+/home/chris/docker/
+└── dashy/
+    ├── user-data/
+    │   └── conf.yml
+    ├── icons/
+    └── docker-compose.yml
 ```
 
 ---
@@ -60,6 +63,7 @@ dashy/
 ## 🛑 Container stoppen
 
 ```bash
+cd /home/chris/docker/dashy
 docker compose down
 ```
 
@@ -68,17 +72,46 @@ docker compose down
 ## ▶️ Container starten
 
 ```bash
+cd /home/chris/docker/dashy
 docker compose up -d
 ```
 
 ---
 
-## 🔄 Backup
+## 🔄 Container aktualisieren
 
-Folgende Daten regelmäßig sichern:
+```bash
+cd /home/chris/docker/dashy
+
+docker compose pull
+docker compose up -d
+```
+
+---
+
+## 💾 Backup
+
+Für ein vollständiges Backup die folgenden Ordner sichern:
 
 ```text
-dashy/
+/home/chris/docker/dashy/user-data
+/home/chris/docker/dashy/icons
+```
+
+---
+
+## 🗑️ Deinstallation
+
+```bash
+cd /home/chris/docker/dashy
+
+docker compose down
+```
+
+Anschließend den Ordner entfernen:
+
+```bash
+rm -rf /home/chris/docker/dashy
 ```
 
 ---
@@ -86,3 +119,11 @@ dashy/
 ## ✅ Fertig
 
 Dein Dashy Dashboard ist jetzt einsatzbereit.
+
+Alle Konfigurationsdaten werden dauerhaft unter
+
+```text
+/home/chris/docker/dashy
+```
+
+gespeichert und bleiben bei Container-Updates erhalten.
