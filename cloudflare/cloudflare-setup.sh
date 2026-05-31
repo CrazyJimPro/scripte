@@ -16,7 +16,9 @@ if ! docker compose version >/dev/null 2>&1; then
     exit 1
 fi
 
-PROJECT_DIR="cloudflare"
+BASE_DIR="/home/chris/docker"
+APP_NAME="cloudflare"
+PROJECT_DIR="${BASE_DIR}/${APP_NAME}"
 
 echo "📁 Erstelle Projektordner..."
 mkdir -p "$PROJECT_DIR/cloudflared"
@@ -48,7 +50,7 @@ services:
     restart: unless-stopped
     command: tunnel --no-autoupdate run
     volumes:
-      - ./cloudflared:/home/nonroot/.cloudflared
+      - /home/chris/docker/cloudflare/cloudflared:/home/nonroot/.cloudflared
     environment:
       - TUNNEL_TOKEN=${TUNNEL_TOKEN}
 EOF
@@ -60,5 +62,6 @@ docker compose up -d
 echo ""
 echo "✅ Cloudflare Tunnel wurde erfolgreich installiert!"
 echo ""
-echo "📦 Containername: cloudflare"
+echo "📁 Installationspfad:"
+echo "$PROJECT_DIR"
 echo ""
