@@ -16,7 +16,9 @@ if ! docker compose version >/dev/null 2>&1; then
     exit 1
 fi
 
-PROJECT_DIR="dashy"
+BASE_DIR="/home/chris/docker"
+APP_NAME="dashy"
+PROJECT_DIR="${BASE_DIR}/${APP_NAME}"
 
 echo "📁 Erstelle Projektordner..."
 mkdir -p "$PROJECT_DIR/user-data"
@@ -48,8 +50,8 @@ services:
     container_name: dashy
     image: lissy93/dashy
     volumes:
-      - ./user-data:/app/user-data
-      - ./icons:/app/public/item-icons
+      - /home/chris/docker/dashy/user-data:/app/user-data
+      - /home/chris/docker/dashy/icons:/app/public/item-icons
     ports:
       - "4000:8080"
     environment:
@@ -67,6 +69,9 @@ LOCAL_IP=$(hostname -I | awk '{print $1}')
 
 echo ""
 echo "✅ Dashy wurde erfolgreich installiert!"
+echo ""
+echo "📁 Installationspfad:"
+echo "$PROJECT_DIR"
 echo ""
 echo "🌐 Zugriff:"
 echo "http://$LOCAL_IP:4000"
