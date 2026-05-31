@@ -19,10 +19,26 @@ fi
 PROJECT_DIR="dashy"
 
 echo "📁 Erstelle Projektordner..."
-
-mkdir -p "$PROJECT_DIR/dashy/icons"
+mkdir -p "$PROJECT_DIR/user-data"
+mkdir -p "$PROJECT_DIR/icons"
 
 cd "$PROJECT_DIR"
+
+echo "📝 Erstelle Standard-Konfiguration..."
+
+cat > user-data/conf.yml <<'EOF'
+pageInfo:
+  title: Dashy
+
+appConfig:
+  theme: colorful
+
+sections:
+  - name: Willkommen
+    items:
+      - title: Dashy Dokumentation
+        url: https://dashy.to/docs
+EOF
 
 echo "📝 Erstelle docker-compose.yml..."
 
@@ -32,8 +48,8 @@ services:
     container_name: dashy
     image: lissy93/dashy
     volumes:
-      - ./dashy:/app/user-data/
-      - ./dashy/icons:/app/public/item-icons/
+      - ./user-data:/app/user-data
+      - ./icons:/app/public/item-icons
     ports:
       - "4000:8080"
     environment:
