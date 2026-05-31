@@ -55,5 +55,3 @@ docker compose up -d
 ## 📌 Hinweis
 
 Dieses Script ist für **Docker-Umgebungen** optimiert und legt alle Daten persistent im `beszel`-Ordner ab, damit bei einem Neustart keine Konfiguration verloren geht.
-
-```
