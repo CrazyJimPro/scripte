@@ -13,7 +13,7 @@ scripte/beszel/
 ├── docker-compose.yml   # Compose Datei (wird automatisch erstellt)
 └── beszel/              # Persistente Daten (Volume)
 
-
+```
 ## ⚡ Installation
 
 Kopiere und führe den folgenden Einzeiler aus:
