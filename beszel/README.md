@@ -35,7 +35,7 @@ Das Script erstellt die Projektstruktur, generiert eine `docker-compose.yml` und
 Beszel ist danach unter deiner **lokalen IP auf Port 8090** erreichbar, z. B.:
 
 ```
-http://192.168.178.7:8090
+http://deineIP:8090
 ```
 
 ---
@@ -59,8 +59,3 @@ Dieses Script ist für **Docker-Umgebungen** optimiert und legt alle Daten persi
 ```
 
 ---
-
-👉 Soll ich dir zusätzlich auch die **README automatisch ins Repo legen** (wie bei den anderen), also `scripte/beszel/README.md` erzeugen, oder möchtest du die erstmal nur **manuell einfügen**?  
-
-Und wegen deinem `update-readme`: Ich kann dir das debuggen – wahrscheinlich liegt es am Pfad (`scripte/generate-readme.sh` vs. Root). Soll ich dir mal eine **angepasste Debug-Variante** bauen, die im Workflow-Log alle gefundenen Dateien anzeigt?
-```
