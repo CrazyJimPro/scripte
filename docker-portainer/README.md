@@ -80,5 +80,3 @@ docker run -d \
 ## 📝 Lizenz
 
 Dieses Projekt steht unter der **MIT Lizenz**.
-
-```
