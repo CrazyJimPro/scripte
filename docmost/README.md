@@ -1,35 +1,41 @@
 # 🚀 Docmost Setup mit Docker
 
-Dieses Repository enthält ein Bash-Skript, um **Docmost** mit PostgreSQL und Redis schnell und einfach in Docker bereitzustellen.  
-Alle benötigten Dateien (`.env`, `docker-compose.yml`) werden automatisch erstellt.  
+Dieses Repository enthält ein Bash-Skript, um Docmost schnell und einfach in Docker bereitzustellen.
+
+Alle benötigten Dateien und Ordner werden automatisch erstellt.
+
+Ein sicherer APP_SECRET sowie ein Datenbankpasswort werden automatisch generiert und in einer `.env` gespeichert.
 
 ---
 
 ## 📋 Voraussetzungen
 
-- Installiertes **Docker** & **Docker Compose**
-- Linux/macOS Terminal mit `bash`
-- Internetzugang (zum Laden der Images)
+- Installiertes Docker
+- Installiertes Docker Compose
+- Installiertes OpenSSL
+- Linux mit bash
 
 ---
 
 ## ⚙️ Installation
 
-Führe einfach folgenden Einzeiler im gewünschten Verzeichnis aus:
+Führe einfach folgenden Einzeiler aus:
 
-```
+```bash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/CrazyJimPro/scripte/main/docmost/docmost-setup.sh)"
-````
-Das Skript erledigt für dich:
+```
 
-* Erstellen der Projektstruktur (`data`, `db_data`, `redis_data`)
-* Generieren einer `.env` mit:
+---
 
-  * `APP_URL` → Lokale IP + Port 3090
-  * `APP_SECRET` → Zufälliger geheimer Schlüssel
-  * `DB_PASSWORD` → Zufälliges Passwort für PostgreSQL
-* Erstellen von `docker-compose.yml`
-* Starten der Container mit `docker compose up -d`
+## 🛠️ Das Skript erledigt automatisch
+
+- Erstellen des Ordners `/home/chris/docker/docmost`
+- Erstellen aller Datenordner
+- Generieren eines sicheren `APP_SECRET`
+- Generieren eines sicheren Datenbankpassworts
+- Erstellen einer `.env`
+- Generieren der `docker-compose.yml`
+- Starten aller Container
 
 ---
 
@@ -37,49 +43,94 @@ Das Skript erledigt für dich:
 
 Nach der Installation erreichst du Docmost unter:
 
-```
-http://<deine-lokale-ip>:3090
+```text
+http://<deine-ip>:3090
 ```
 
 ---
 
 ## 📂 Projektstruktur
 
-```
-docmost/
-├── data/          # Docmost Daten (Uploads, Dateien)
-├── db_data/       # PostgreSQL Datenbankdaten
-├── redis_data/    # Redis Daten
-├── .env           # Automatisch generierte Umgebungsvariablen
-├── docker-compose.yml
-└── docmost-setup.sh
+```text
+/home/chris/docker/
+└── docmost/
+    ├── data/
+    ├── db_data/
+    ├── redis_data/
+    ├── .env
+    └── docker-compose.yml
 ```
 
 ---
 
-## 🛑 Container stoppen & starten
+## 🛑 Container stoppen
 
 ```bash
-# Stoppen
+cd /home/chris/docker/docmost
 docker compose down
+```
 
-# Starten
+---
+
+## ▶️ Container starten
+
+```bash
+cd /home/chris/docker/docmost
 docker compose up -d
 ```
 
 ---
 
-## 🔄 Backup-Hinweis
+## 🔄 Container aktualisieren
 
-Die relevanten Daten liegen in folgenden Ordnern und sollten regelmäßig gesichert werden:
+```bash
+cd /home/chris/docker/docmost
 
-* `data/`
-* `db_data/`
-* `redis_data/`
+docker compose pull
+docker compose up -d
+```
+
+---
+
+## 💾 Backup
+
+Für ein vollständiges Backup folgende Daten sichern:
+
+```text
+/home/chris/docker/docmost/data
+/home/chris/docker/docmost/db_data
+/home/chris/docker/docmost/redis_data
+/home/chris/docker/docmost/.env
+```
+
+---
+
+## 🗑️ Deinstallation
+
+Container stoppen:
+
+```bash
+cd /home/chris/docker/docmost
+
+docker compose down
+```
+
+Anschließend den Ordner entfernen:
+
+```bash
+rm -rf /home/chris/docker/docmost
+```
 
 ---
 
 ## ✅ Fertig
 
-Dein Docmost-Setup ist jetzt einsatzbereit.
-Rufe es einfach im Browser auf und lege direkt los!
+Dein Docmost-Server ist jetzt einsatzbereit.
+
+Alle Daten werden dauerhaft unter
+
+```text
+/home/chris/docker/docmost
+```
+
+gespeichert und bleiben bei Container-Updates erhalten.
