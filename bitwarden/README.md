@@ -75,7 +75,7 @@ ADMIN_TOKEN=xxxxxxxxxxxxxxxx
 👉 Das Admin-Interface erreichst du unter:
 
 ```
-http://192.168.178.50:8088/admin
+http://deineIP:8088/admin
 ```
 
 ---
