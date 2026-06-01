@@ -1,30 +1,59 @@
 #!/bin/bash
+
 set -e
 
-# Basisverzeichnis = aktuelles Verzeichnis
-BASE_DIR=$(pwd)
+echo "🚀 Starte Authentik Setup..."
 
-echo "📁 Erstelle Projektstruktur unter: $BASE_DIR"
+# Docker prüfen
+if ! command -v docker >/dev/null 2>&1; then
+    echo "❌ Docker ist nicht installiert."
+    exit 1
+fi
 
-# Verzeichnisse
-mkdir -p $BASE_DIR/{database,redis,authentik/media,authentik/custom-templates}
+# Docker Compose prüfen
+if ! docker compose version >/dev/null 2>&1; then
+    echo "❌ Docker Compose ist nicht verfügbar."
+    exit 1
+fi
 
-# .env Datei mit Standardwerten
-if [ ! -f "$BASE_DIR/.env" ]; then
-cat <<EOF > $BASE_DIR/.env
-# Authentik Konfiguration
+# OpenSSL prüfen
+if ! command -v openssl >/dev/null 2>&1; then
+    echo "❌ OpenSSL ist nicht installiert."
+    exit 1
+fi
+
+BASE_DIR="/home/chris/docker"
+APP_NAME="authentik"
+PROJECT_DIR="${BASE_DIR}/${APP_NAME}"
+
+echo "📁 Erstelle Projektordner..."
+
+mkdir -p "$PROJECT_DIR/database"
+mkdir -p "$PROJECT_DIR/redis"
+mkdir -p "$PROJECT_DIR/authentik/media"
+mkdir -p "$PROJECT_DIR/authentik/custom-templates"
+
+cd "$PROJECT_DIR"
+
+echo "🔐 Generiere Zugangsdaten..."
+
 AUTHENTIK_SECRET_KEY=$(openssl rand -hex 32)
-AUTHENTIK_POSTGRES_USER=authentik
 AUTHENTIK_POSTGRES_PASSWORD=$(openssl rand -hex 16)
+
+echo "📝 Erstelle .env..."
+
+cat > .env <<EOF
+AUTHENTIK_SECRET_KEY=$AUTHENTIK_SECRET_KEY
+AUTHENTIK_POSTGRES_USER=authentik
+AUTHENTIK_POSTGRES_PASSWORD=$AUTHENTIK_POSTGRES_PASSWORD
 AUTHENTIK_POSTGRES_DB=authentik
 AUTHENTIK_REDIS_HOST=redis
 AUTHENTIK_POSTGRES_HOST=database
 EOF
-fi
 
-# docker-compose.yml erstellen
-cat <<'EOF' > $BASE_DIR/docker-compose.yml
+echo "📝 Erstelle docker-compose.yml..."
 
+cat > docker-compose.yml <<'EOF'
 services:
   database:
     image: postgres:15
@@ -35,7 +64,7 @@ services:
       POSTGRES_PASSWORD: ${AUTHENTIK_POSTGRES_PASSWORD}
       POSTGRES_DB: ${AUTHENTIK_POSTGRES_DB}
     volumes:
-      - ./database:/var/lib/postgresql/data
+      - /home/chris/docker/authentik/database:/var/lib/postgresql/data
 
   redis:
     image: redis:7
@@ -43,7 +72,7 @@ services:
     restart: unless-stopped
     command: ["redis-server", "--save", "60", "1", "--loglevel", "warning"]
     volumes:
-      - ./redis:/data
+      - /home/chris/docker/authentik/redis:/data
 
   authentik-server:
     image: ghcr.io/goauthentik/server:2025.8.1
@@ -58,8 +87,8 @@ services:
       AUTHENTIK_POSTGRESQL__NAME: ${AUTHENTIK_POSTGRES_DB}
       AUTHENTIK_REDIS__HOST: redis
     volumes:
-      - ./authentik/media:/media
-      - ./authentik/custom-templates:/templates
+      - /home/chris/docker/authentik/authentik/media:/media
+      - /home/chris/docker/authentik/authentik/custom-templates:/templates
     depends_on:
       - database
       - redis
@@ -68,7 +97,7 @@ services:
       - "9444:9443"
 
   authentik-worker:
-    image: ghcr.io/goauthentik/server:latest
+    image: ghcr.io/goauthentik/server:2025.8.1
     container_name: authentik-worker
     restart: unless-stopped
     command: worker
@@ -80,20 +109,25 @@ services:
       AUTHENTIK_POSTGRESQL__NAME: ${AUTHENTIK_POSTGRES_DB}
       AUTHENTIK_REDIS__HOST: redis
     volumes:
-      - ./authentik/media:/media
-      - ./authentik/custom-templates:/templates
+      - /home/chris/docker/authentik/authentik/media:/media
+      - /home/chris/docker/authentik/authentik/custom-templates:/templates
     depends_on:
       - database
       - redis
 EOF
 
-# Container starten
-echo "🚀 Starte Docker Container..."
+echo "🐳 Starte Container..."
+
 docker compose up -d
 
-# Lokale IP automatisch ermitteln
 LOCAL_IP=$(hostname -I | awk '{print $1}')
 
-echo "✅ Authentik Setup abgeschlossen!"
-echo "Rufe den Initial Setup Wizard auf unter: http://$LOCAL_IP:9010/if/flow/initial-setup/"
-
+echo ""
+echo "✅ Authentik wurde erfolgreich installiert!"
+echo ""
+echo "📁 Installationspfad:"
+echo "$PROJECT_DIR"
+echo ""
+echo "🌐 Initial Setup Wizard:"
+echo "http://$LOCAL_IP:9010/if/flow/initial-setup/"
+echo ""
