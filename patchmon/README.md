@@ -92,13 +92,11 @@ Wichtig:
 - redis_data
 - agent_files
 - .env
-```
+
 
 ---
 
-
 ## 🗑️ Deinstallation
-
 
 ```bash
 cd /home/chris/docker/patchmon
