@@ -1,6 +1,6 @@
-# 🚀 PatchMon Setup (Docker)
+# 🚀 PatchMon v2 (Final Setup)
 
-Self-hosted Patch Management Plattform.
+Sauberes Docker Setup für PatchMon v2.x (Single Server Architecture)
 
 ---
 
@@ -21,12 +21,13 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/CrazyJimPro/scripte/main
 
 ---
 
-## 🧠 Was wird installiert
+## 🧠 Architektur Hinweis (wichtig)
 
-- PatchMon Backend (latest)
-- PatchMon Frontend (latest)
-- PostgreSQL 17
-- Redis 7
+PatchMon v2 nutzt **keinen separaten Backend/Frontend Stack mehr**.
+
+✔ Stattdessen:
+- ein Server Container
+- integrierte UI + API
 
 ---
 
@@ -38,35 +39,37 @@ http://<SERVER-IP>:3010
 
 ---
 
-## ⚠️ Hinweis zur Version
+## 🔐 Standard-Komponenten
 
-PatchMon stellt aktuell **keine stabilen 2.x Docker-Tags** bereit.
-
-Darum wird verwendet:
-
-```text
-ghcr.io/patchmon/patchmon-backend:latest
-ghcr.io/patchmon/patchmon-frontend:latest
-```
+- PostgreSQL 17
+- Redis 7
+- PatchMon Server v2.0.2
 
 ---
 
 ## ⭐ Empfohlene Konfiguration
 
-### Reverse Proxy
+### Reverse Proxy (optional)
 
-Empfohlen über Nginx Proxy Manager:
+Empfohlen:
 
-- Domain statt IP
+- Nginx Proxy Manager
 - HTTPS aktivieren
-- Port 3010 intern lassen
+- interne IP nicht öffentlich nutzen
 
 ---
 
-## 🔐 Passwörter ändern
+## 🔑 Passwort & Secrets ändern
+
+Alle Secrets liegen in:
+
+```text
+/home/chris/docker/patchmon/.env
+```
+
+Ändern:
 
 ```bash
-cd /home/chris/docker/patchmon
 nano .env
 docker compose up -d
 ```
@@ -75,6 +78,8 @@ docker compose up -d
 
 ## 💾 Backup
 
+Wichtige Daten:
+
 ```text
 /home/chris/docker/patchmon
 ```
@@ -82,9 +87,9 @@ docker compose up -d
 Enthält:
 
 - Datenbank
-- Redis
+- Redis Cache
 - Agent Files
-- Konfiguration (.env)
+- Konfiguration
 
 ---
 
@@ -98,6 +103,6 @@ rm -rf /home/chris/docker/patchmon
 
 ---
 
-## ✅ Status
+## 🚀 Status
 
-PatchMon läuft stabil mit aktuellen GHCR Images.
+PatchMon läuft in **v2 Architektur (Single Container Server Mode)**.
