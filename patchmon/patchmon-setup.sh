@@ -2,7 +2,7 @@
 
 set -e
 
-echo "🚀 PatchMon v2.0.2 Setup wird gestartet..."
+echo "🚀 PatchMon Setup wird gestartet..."
 
 BASE_DIR="/home/chris/docker"
 APP_NAME="patchmon"
@@ -77,7 +77,7 @@ services:
       - patchmon-net
 
   backend:
-    image: ghcr.io/patchmon/patchmon-backend:2.0.2
+    image: ghcr.io/patchmon/patchmon-backend:latest
     container_name: patchmon-backend
     restart: unless-stopped
     environment:
@@ -119,7 +119,7 @@ services:
       - patchmon-net
 
   patchmon-frontend:
-    image: ghcr.io/patchmon/patchmon-frontend:2.0.2
+    image: ghcr.io/patchmon/patchmon-frontend:latest
     container_name: patchmon-frontend
     restart: unless-stopped
     ports:
