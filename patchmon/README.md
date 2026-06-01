@@ -94,7 +94,6 @@ Wichtig:
 - .env
 ```
 
----
 
 ## 🗑️ Deinstallation
 
