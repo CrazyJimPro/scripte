@@ -98,6 +98,7 @@ Wichtig:
 
 ## 🗑️ Deinstallation
 
+
 ```bash
 cd /home/chris/docker/patchmon
 docker compose down
