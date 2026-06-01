@@ -136,14 +136,12 @@ networks:
 EOF
 
 echo "🌐 Prüfe Netzwerk..."
-
 docker network inspect patchmon-net >/dev/null 2>&1 || docker network create patchmon-net
 
 echo "🐳 Starte PatchMon..."
-
 docker compose up -d
 
 echo ""
-echo "✅ PatchMon v2.0.2 läuft!"
+echo "✅ PatchMon läuft!"
 echo "Frontend: http://${LOCAL_IP}:3010"
 echo ""
