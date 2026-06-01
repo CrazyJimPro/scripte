@@ -1,6 +1,6 @@
-# 🚀 PatchMon Setup mit Docker
+# 🚀 PatchMon v2.0.2 Setup (Docker)
 
-Self-hosted Patch Management Plattform.
+Self-hosted Patch Management Plattform (v2 Release).
 
 ---
 
@@ -9,6 +9,7 @@ Self-hosted Patch Management Plattform.
 - Docker
 - Docker Compose
 - Linux Server
+- Ports 3010 frei
 
 ---
 
@@ -20,53 +21,43 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/CrazyJimPro/scripte/main
 
 ---
 
-## 🛠️ Automatisch erstellt
+## 🧠 Was wird installiert
 
-- PostgreSQL Database
-- Redis Cache
-- Backend API
-- Frontend UI
-- sichere Passwörter
-- `.env` Datei
+- PatchMon Backend v2.0.2
+- PatchMon Frontend v2.0.2
+- PostgreSQL 17
+- Redis 7
+- Automatische Konfiguration
 
 ---
 
 ## 🌐 Zugriff
 
 ```text
-http://<IP>:3010
+http://<SERVER-IP>:3010
 ```
 
 ---
 
 ## ⭐ Empfohlene Konfiguration
 
-### 1. Reverse Proxy
+### Reverse Proxy (empfohlen)
 
-Empfohlen über Nginx Proxy Manager:
+Nutze Nginx Proxy Manager:
 
 - Domain statt IP verwenden
 - HTTPS aktivieren
+- Port 3010 intern lassen
 
 ---
 
-### 2. Sicherheit
+### Sicherheit
 
-Nach Installation unbedingt:
+Nach Installation:
 
-- `.env` Datei sichern
-- Passwörter nicht öffentlich speichern
+- `.env` sichern
 - JWT_SECRET geheim halten
-
----
-
-### 3. Redis Passwort
-
-Änderbar in:
-
-```text
-/home/chris/docker/patchmon/.env
-```
+- Redis Passwort nicht teilen
 
 ---
 
@@ -82,17 +73,18 @@ docker compose up -d
 
 ## 💾 Backup
 
+Wichtige Daten:
+
 ```text
 /home/chris/docker/patchmon
 ```
 
-Wichtig:
+Enthält:
 
-- postgres_data
-- redis_data
-- agent_files
-- .env
-
+- PostgreSQL Daten
+- Redis Daten
+- Agent Files
+- Konfiguration (.env)
 
 ---
 
@@ -106,6 +98,10 @@ rm -rf /home/chris/docker/patchmon
 
 ---
 
-## ✅ Fertig
+## 🚀 Status
 
-PatchMon ist einsatzbereit.
+PatchMon läuft in Version:
+
+```text
+2.0.2
+```
