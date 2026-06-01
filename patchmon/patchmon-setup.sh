@@ -2,24 +2,14 @@
 
 set -e
 
-echo "🚀 Starte PatchMon Setup..."
-
-if ! command -v docker >/dev/null 2>&1; then
-    echo "❌ Docker fehlt"
-    exit 1
-fi
-
-if ! docker compose version >/dev/null 2>&1; then
-    echo "❌ Docker Compose fehlt"
-    exit 1
-fi
+echo "🚀 PatchMon v2.0.2 Setup wird gestartet..."
 
 BASE_DIR="/home/chris/docker"
 APP_NAME="patchmon"
 PROJECT_DIR="${BASE_DIR}/${APP_NAME}"
 
 if [ -f "$PROJECT_DIR/docker-compose.yml" ]; then
-    echo "❌ Installation bereits vorhanden: $PROJECT_DIR"
+    echo "❌ PatchMon ist bereits installiert: $PROJECT_DIR"
     exit 1
 fi
 
@@ -51,16 +41,16 @@ cd "$PROJECT_DIR"
 
 echo "📝 Erstelle docker-compose.yml..."
 
-cat > docker-compose.yml <<'EOF'
+cat > docker-compose.yml <<EOF
 services:
   patchmon-database:
     image: postgres:17-alpine
     container_name: patchmon-db
     restart: unless-stopped
     environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: \${POSTGRES_DB}
+      POSTGRES_USER: \${POSTGRES_USER}
+      POSTGRES_PASSWORD: \${POSTGRES_PASSWORD}
     volumes:
       - /home/chris/docker/patchmon/postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -75,11 +65,11 @@ services:
     image: redis:7-alpine
     container_name: patchmon-redis
     restart: unless-stopped
-    command: redis-server --requirepass ${REDIS_PASSWORD}
+    command: redis-server --requirepass \${REDIS_PASSWORD}
     volumes:
       - /home/chris/docker/patchmon/redis_data:/data
     healthcheck:
-      test: ["CMD", "redis-cli", "--no-auth-warning", "-a", "${REDIS_PASSWORD}", "ping"]
+      test: ["CMD", "redis-cli", "--no-auth-warning", "-a", "\${REDIS_PASSWORD}", "ping"]
       interval: 3s
       timeout: 5s
       retries: 7
@@ -87,17 +77,17 @@ services:
       - patchmon-net
 
   backend:
-    image: ghcr.io/patchmon/patchmon-backend:latest
+    image: ghcr.io/patchmon/patchmon-backend:2.0.2
     container_name: patchmon-backend
     restart: unless-stopped
     environment:
       LOG_LEVEL: info
-      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@patchmon-database:5432/${POSTGRES_DB}
-      JWT_SECRET: ${JWT_SECRET}
+      DATABASE_URL: postgresql://\${POSTGRES_USER}:\${POSTGRES_PASSWORD}@patchmon-database:5432/\${POSTGRES_DB}
+      JWT_SECRET: \${JWT_SECRET}
       SERVER_PROTOCOL: http
-      SERVER_HOST: ${LOCAL_IP}
+      SERVER_HOST: \${LOCAL_IP}
       SERVER_PORT: 3010
-      CORS_ORIGIN: http://${LOCAL_IP}:3010
+      CORS_ORIGIN: http://\${LOCAL_IP}:3010
 
       DB_CONNECTION_LIMIT: 30
       DB_POOL_TIMEOUT: 20
@@ -113,7 +103,7 @@ services:
 
       REDIS_HOST: patchmon-redis
       REDIS_PORT: 6379
-      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      REDIS_PASSWORD: \${REDIS_PASSWORD}
       REDIS_DB: 0
 
     volumes:
@@ -129,7 +119,7 @@ services:
       - patchmon-net
 
   patchmon-frontend:
-    image: ghcr.io/patchmon/patchmon-frontend:latest
+    image: ghcr.io/patchmon/patchmon-frontend:2.0.2
     container_name: patchmon-frontend
     restart: unless-stopped
     ports:
@@ -154,6 +144,6 @@ echo "🐳 Starte PatchMon..."
 docker compose up -d
 
 echo ""
-echo "✅ PatchMon gestartet!"
-echo "Backend:   http://${LOCAL_IP}:3010"
+echo "✅ PatchMon v2.0.2 läuft!"
+echo "Frontend: http://${LOCAL_IP}:3010"
 echo ""
