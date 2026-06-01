@@ -1,57 +1,125 @@
-# 📊 Beszel Setup Script
+# 🚀 Beszel Setup mit Docker
 
-Dieses Script installiert und startet [Beszel](https://github.com/henrygd/beszel), eine leichtgewichtige Monitoring-Lösung für deine Server und Container.
+Dieses Repository enthält ein Bash-Skript, um Beszel schnell und einfach in Docker bereitzustellen.
+
+Alle benötigten Dateien und Ordner werden automatisch erstellt.
+
+---
+
+## 📋 Voraussetzungen
+
+- Installiertes Docker
+- Installiertes Docker Compose
+- Linux mit bash
+
+---
+
+## ⚙️ Installation
+
+Führe einfach folgenden Einzeiler aus:
+
+```bash
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/CrazyJimPro/scripte/main/beszel/beszel-setup.sh)"
+```
+
+---
+
+## 🛠️ Das Skript erledigt automatisch
+
+- Erstellen des Ordners `/home/chris/docker/beszel`
+- Erstellen des Datenordners
+- Automatisches Anlegen des Docker-Netzwerks `docker`
+- Generieren der `docker-compose.yml`
+- Starten des Containers
+
+---
+
+## 🌐 Zugriff
+
+Nach der Installation erreichst du Beszel unter:
+
+```text
+http://<deine-ip>:8090
+```
 
 ---
 
 ## 📂 Projektstruktur
 
-```
-
-scripte/beszel/
-├── beszel-setup.sh      # Setup Script
-├── docker-compose.yml   # Compose Datei (wird automatisch erstellt)
-└── beszel/              # Persistente Daten (Volume)
-
-```
-## ⚡ Installation
-
-Kopiere und führe den folgenden Einzeiler aus:
-
-````
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/<DEIN-USER>/<DEIN-REPO>/main/scripte/beszel/beszel-setup.sh)"
-````
-
-Das Script erstellt die Projektstruktur, generiert eine `docker-compose.yml` und startet die Container automatisch.
-
----
-
-## 🔑 Standardkonfiguration
-
-* **Port:** `8090`
-* **Containername:** `beszel`
-* **Datenvolumen:** `./beszel:/beszel_data`
-
-Beszel ist danach unter deiner **lokalen IP auf Port 8090** erreichbar, z. B.:
-
-```
-http://deineIP:8090
+```text
+/home/chris/docker/
+└── beszel/
+    ├── data/
+    └── docker-compose.yml
 ```
 
 ---
 
-## 🔄 Update
-
-Zum Updaten auf die neueste Version:
+## 🛑 Container stoppen
 
 ```bash
-cd scripte/beszel
+cd /home/chris/docker/beszel
+docker compose down
+```
+
+---
+
+## ▶️ Container starten
+
+```bash
+cd /home/chris/docker/beszel
+docker compose up -d
+```
+
+---
+
+## 🔄 Container aktualisieren
+
+```bash
+cd /home/chris/docker/beszel
+
 docker compose pull
 docker compose up -d
 ```
 
 ---
 
-## 📌 Hinweis
+## 💾 Backup
 
-Dieses Script ist für **Docker-Umgebungen** optimiert und legt alle Daten persistent im `beszel`-Ordner ab, damit bei einem Neustart keine Konfiguration verloren geht.
+Für ein vollständiges Backup folgende Daten sichern:
+
+```text
+/home/chris/docker/beszel/data
+```
+
+---
+
+## 🗑️ Deinstallation
+
+Container stoppen:
+
+```bash
+cd /home/chris/docker/beszel
+
+docker compose down
+```
+
+Anschließend den Ordner entfernen:
+
+```bash
+rm -rf /home/chris/docker/beszel
+```
+
+---
+
+## ✅ Fertig
+
+Dein Beszel-Server ist jetzt einsatzbereit.
+
+Alle Daten werden dauerhaft unter
+
+```text
+/home/chris/docker/beszel
+```
+
+gespeichert und bleiben bei Container-Updates erhalten.
