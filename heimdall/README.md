@@ -1,63 +1,130 @@
-# 🚀 Heimdall Setup
+# 🚀 Heimdall Setup mit Docker
 
-[![Docker](https://img.shields.io/badge/Docker-✔-blue)](https://www.docker.com/)
-[![Linux](https://img.shields.io/badge/Linux-✔-yellow)](https://www.kernel.org/)
-[![Heimdall](https://img.shields.io/badge/Heimdall-✔-green)](https://github.com/linuxserver/Heimdall)
+Dieses Repository enthält ein Bash-Skript, um Heimdall schnell und einfach in Docker bereitzustellen.
 
-Ein automatisiertes Setup-Skript für [Heimdall](https://github.com/linuxserver/Heimdall) mit Docker Compose.  
-Heimdall ist ein eleganter **Application Dashboard** für deine selbstgehosteten Dienste.
+Alle benötigten Dateien und Ordner werden automatisch erstellt.
 
 ---
 
-## 📂 Projektstruktur
+## 📋 Voraussetzungen
 
+- Installiertes Docker
+- Installiertes Docker Compose
+- Linux mit bash
+
+---
+
+## ⚙️ Installation
+
+Führe einfach folgenden Einzeiler aus:
+
+```bash
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/CrazyJimPro/scripte/main/heimdall/heimdall-setup.sh)"
 ```
 
-heimdall/
-├── config/                # Konfigurationsordner von Heimdall
-├── docker-compose.yml     # Docker Compose Datei
-└── heimdall-setup.sh      # Setup-Skript
-````
+---
 
+## 🛠️ Das Skript erledigt automatisch
 
-## ⚙️ Installation mit Einzeiler
-
-   ```bash
-   bash -c "$(curl -fsSL https://raw.githubusercontent.com/CrazyJimPro/scripte/main/heimdall/heimdall-setup.sh)"
-   ```
+- Erstellen des Ordners `/home/chris/docker/heimdall`
+- Erstellen des Konfigurationsordners
+- Generieren der `docker-compose.yml`
+- Starten des Containers
 
 ---
 
 ## 🌐 Zugriff
 
-Nach der Installation erreichst du Heimdall unter:
+HTTP:
 
-* **HTTP:** `http://<deine-ip>:7202`
-* **HTTPS:** `https://<deine-ip>:7203`
+```text
+http://<deine-ip>:7202
+```
 
-Standardmäßig werden deine Konfigurationen im Ordner
-`heimdall/config` gespeichert.
+HTTPS:
+
+```text
+https://<deine-ip>:7203
+```
 
 ---
 
-## 🔄 Update auf neue Version
+## 📂 Projektstruktur
 
-Um Heimdall auf die neueste Version zu aktualisieren:
+```text
+/home/chris/docker/
+└── heimdall/
+    ├── config/
+    └── docker-compose.yml
+```
+
+---
+
+## 🛑 Container stoppen
 
 ```bash
-cd ~/scripte/heimdall
+cd /home/chris/docker/heimdall
+docker compose down
+```
+
+---
+
+## ▶️ Container starten
+
+```bash
+cd /home/chris/docker/heimdall
+docker compose up -d
+```
+
+---
+
+## 🔄 Container aktualisieren
+
+```bash
+cd /home/chris/docker/heimdall
+
 docker compose pull
 docker compose up -d
 ```
 
 ---
 
-## 🛠️ Anforderungen
+## 💾 Backup
 
-* Linux-Server (z. B. Ubuntu, Debian)
-* Docker & Docker Compose installiert
-* Port **7202** (HTTP) und **7203** (HTTPS) frei
+Für ein vollständiges Backup folgende Daten sichern:
+
+```text
+/home/chris/docker/heimdall/config
+```
 
 ---
 
-✨ Fertig – dein Heimdall Dashboard läuft jetzt!
+## 🗑️ Deinstallation
+
+Container stoppen:
+
+```bash
+cd /home/chris/docker/heimdall
+
+docker compose down
+```
+
+Anschließend den Ordner entfernen:
+
+```bash
+rm -rf /home/chris/docker/heimdall
+```
+
+---
+
+## ✅ Fertig
+
+Dein Heimdall-Dashboard ist jetzt einsatzbereit.
+
+Alle Daten werden dauerhaft unter
+
+```text
+/home/chris/docker/heimdall
+```
+
+gespeichert und bleiben bei Container-Updates erhalten.
