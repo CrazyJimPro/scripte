@@ -21,7 +21,7 @@ APP_NAME="beszel"
 PROJECT_DIR="${BASE_DIR}/${APP_NAME}"
 
 echo "📁 Erstelle Projektordner..."
-mkdir -p "$PROJECT_DIR/beszel"
+mkdir -p "$PROJECT_DIR/data"
 
 cd "$PROJECT_DIR"
 
@@ -45,7 +45,7 @@ services:
     ports:
       - "8090:8090"
     volumes:
-      - /home/chris/docker/beszel/beszel:/beszel_data
+      - /home/chris/docker/beszel/data:/beszel_data
     networks:
       - docker
 
