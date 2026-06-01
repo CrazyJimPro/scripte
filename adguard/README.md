@@ -46,10 +46,10 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/CrazyJimPro/scripte/main
 
 ### Erster Start
 
-Einrichtungsassistent:
+Setup Wizard:
 
 ```text
-http://<deine-ip>:3001
+http://<deine-ip>:3030
 ```
 
 ### Nach Abschluss des Assistenten
@@ -65,6 +65,53 @@ oder
 ```text
 https://<deine-ip>
 ```
+
+---
+
+## ⭐ Empfohlene Konfiguration
+
+Nach dem ersten Login empfiehlt es sich, sichere DNS-over-HTTPS-Server als Upstream-DNS einzutragen.
+
+### Quad9
+
+```text
+https://dns10.quad9.net/dns-query
+```
+
+### Cloudflare
+
+```text
+https://1.1.1.1/dns-query
+```
+
+### Kombination (Empfohlen)
+
+```text
+https://dns10.quad9.net/dns-query
+https://1.1.1.1/dns-query
+```
+
+Vorteile:
+
+- DNS-Anfragen werden verschlüsselt übertragen
+- Schutz vor DNS-Manipulation
+- Höhere Privatsphäre
+- Quad9 blockiert bekannte Malware-Domains
+- Cloudflare bietet sehr schnelle Antwortzeiten
+
+---
+
+## 🔒 DNS-Blocklisten
+
+Für einen guten Werbe-, Tracking- und Malware-Schutz empfiehlt sich mindestens folgende Blockliste:
+
+### OISD Full
+
+```text
+https://big.oisd.nl/
+```
+
+OISD kombiniert zahlreiche bekannte Werbe-, Tracking- und Malware-Listen und gilt als eine der beliebtesten Konfigurationen für AdGuard Home.
 
 ---
 
@@ -146,7 +193,7 @@ rm -rf /home/chris/docker/adguardhome
 67/udp (DHCP)
 80/tcp
 443/tcp
-3001/tcp
+3030/tcp (Setup Wizard)
 ```
 
 ---
