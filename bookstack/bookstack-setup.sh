@@ -1,81 +1,110 @@
 #!/bin/bash
+
 set -e
 
-# Basisverzeichnis = aktuelles Verzeichnis
-BASE_DIR=$(pwd)
+echo "🚀 Starte BookStack Setup..."
 
-echo "📁 Erstelle Projektstruktur unter: $BASE_DIR"
+# Docker prüfen
+if ! command -v docker >/dev/null 2>&1; then
+    echo "❌ Docker ist nicht installiert."
+    exit 1
+fi
 
-# Verzeichnisse
-mkdir -p $BASE_DIR/{db,config,uploads}
+# Docker Compose prüfen
+if ! docker compose version >/dev/null 2>&1; then
+    echo "❌ Docker Compose ist nicht verfügbar."
+    exit 1
+fi
 
-# Lokale IP automatisch ermitteln
+# OpenSSL prüfen
+if ! command -v openssl >/dev/null 2>&1; then
+    echo "❌ OpenSSL ist nicht installiert."
+    exit 1
+fi
+
+BASE_DIR="/home/chris/docker"
+APP_NAME="bookstack"
+PROJECT_DIR="${BASE_DIR}/${APP_NAME}"
+
+echo "📁 Erstelle Projektordner..."
+
+mkdir -p "$PROJECT_DIR/db"
+mkdir -p "$PROJECT_DIR/config"
+mkdir -p "$PROJECT_DIR/uploads"
+
+cd "$PROJECT_DIR"
+
 LOCAL_IP=$(hostname -I | awk '{print $1}')
 
-# .env Datei mit Standardwerten
-if [ ! -f "$BASE_DIR/.env" ]; then
-    echo "⚙️  Generiere APP_KEY..."
-    APP_KEY=$(openssl rand -hex 32)
-    DB_PASSWORD=$(openssl rand -hex 16)
+echo "🔐 Generiere Zugangsdaten..."
 
-    cat <<EOF > $BASE_DIR/.env
-# BookStack Konfiguration
+APP_KEY=$(openssl rand -hex 32)
+DB_PASSWORD=$(openssl rand -hex 16)
+
+echo "📝 Erstelle .env..."
+
+cat > .env <<EOF
 APP_URL=http://$LOCAL_IP:6875
 APP_KEY=$APP_KEY
 
-# Datenbank
 DB_HOST=db
 DB_DATABASE=bookstack
 DB_USERNAME=bookstack
 DB_PASSWORD=$DB_PASSWORD
 EOF
-fi
 
-# docker-compose.yml erstellen
-cat <<EOF > $BASE_DIR/docker-compose.yml
+echo "📝 Erstelle docker-compose.yml..."
+
+cat > docker-compose.yml <<'EOF'
 services:
   db:
     image: mariadb:11
     container_name: bookstack-db
     restart: unless-stopped
     environment:
-      MYSQL_DATABASE: \${DB_DATABASE}
-      MYSQL_USER: \${DB_USERNAME}
-      MYSQL_PASSWORD: \${DB_PASSWORD}
-      MYSQL_ROOT_PASSWORD: \${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
     volumes:
-      - ./db:/var/lib/mysql
+      - /home/chris/docker/bookstack/db:/var/lib/mysql
 
   bookstack:
     image: lscr.io/linuxserver/bookstack:latest
     container_name: bookstack
     restart: unless-stopped
     environment:
-      APP_URL: \${APP_URL}
-      APP_KEY: \${APP_KEY}
-      DB_HOST: \${DB_HOST}
-      DB_DATABASE: \${DB_DATABASE}
-      DB_USERNAME: \${DB_USERNAME}
-      DB_PASSWORD: \${DB_PASSWORD}
+      APP_URL: ${APP_URL}
+      APP_KEY: ${APP_KEY}
+      DB_HOST: ${DB_HOST}
+      DB_DATABASE: ${DB_DATABASE}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
     volumes:
-      - ./config:/config
-      - ./uploads:/config/uploads
+      - /home/chris/docker/bookstack/config:/config
+      - /home/chris/docker/bookstack/uploads:/config/uploads
     ports:
       - "6875:80"
     depends_on:
       - db
 EOF
 
-# Container starten
-echo "🚀 Starte Docker Container..."
+echo "🐳 Starte Container..."
+
 docker compose up -d
 
-echo "⏳ Warte, bis die Datenbank bereit ist..."
-# Robuste DB-Warte-Schleife direkt im Container mit MYSQL_PWD
-until docker exec -e MYSQL_PWD=$DB_PASSWORD bookstack-db mysqladmin ping -h localhost >/dev/null 2>&1; do
-  sleep 2
+echo "⏳ Warte auf Datenbank..."
+
+until docker exec -e MYSQL_PWD="$DB_PASSWORD" bookstack-db mysqladmin ping -h localhost >/dev/null 2>&1; do
+    sleep 2
 done
 
-echo "✅ BookStack Setup abgeschlossen!"
-echo "Rufe BookStack auf unter: http://$LOCAL_IP:6875"
-
+echo ""
+echo "✅ BookStack wurde erfolgreich installiert!"
+echo ""
+echo "📁 Installationspfad:"
+echo "$PROJECT_DIR"
+echo ""
+echo "🌐 Zugriff:"
+echo "http://$LOCAL_IP:6875"
+echo ""
