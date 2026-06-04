@@ -19,8 +19,8 @@ mkdir -p "$PROJECT_DIR/agent_files"
 
 LOCAL_IP=$(hostname -I | awk '{print $1}')
 
-POSTGRES_PASSWORD=$(openssl rand -hex 16)
-REDIS_PASSWORD=$(openssl rand -hex 16)
+POSTGRES_PASSWORD=$(openssl rand -hex 32)
+REDIS_PASSWORD=$(openssl rand -hex 32)
 JWT_SECRET=$(openssl rand -hex 32)
 
 echo "⚙️ Erstelle .env..."
@@ -44,7 +44,7 @@ cat > docker-compose.yml <<EOF
 services:
 
   patchmon:
-    image: ghcr.io/patchmon/patchmon-server:2.0.2
+    image: ghcr.io/patchmon/patchmon-server:2
     container_name: patchmon
     restart: unless-stopped
 
