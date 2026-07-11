@@ -2,8 +2,8 @@
 
 [![Docker](https://img.shields.io/badge/Docker-✔-2496ED?logo=docker&logoColor=white)](https://www.docker.com/) 
 [![Raspberry Pi](https://img.shields.io/badge/Raspberry%20Pi-Supported-C51A4A?logo=raspberrypi&logoColor=white)](https://www.raspberrypi.com/)  
-[![GitHub stars](https://img.shields.io/github/stars/<BENUTZERNAME>/watchtower-setup?style=social)](https://github.com/<BENUTZERNAME>/watchtower-setup/stargazers) 
-[![GitHub forks](https://img.shields.io/github/forks/<BENUTZERNAME>/watchtower-setup?style=social)](https://github.com/<BENUTZERNAME>/watchtower-setup/network/members)  
+[![GitHub stars](https://img.shields.io/github/stars/CrazyJimPro/scripte?style=social)](https://github.com/CrazyJimPro/scripte/stargazers) 
+[![GitHub forks](https://img.shields.io/github/forks/CrazyJimPro/scripte?style=social)](https://github.com/CrazyJimPro/scripte/network/members)  
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 Dieses Repository enthält ein Bash-Skript, das den [Watchtower](https://containrrr.dev/watchtower/) Container installiert.  
@@ -42,7 +42,7 @@ Nach der Installation wird lediglich der Container erstellt:
 
 ```
 watchtower/
-└── watchtower.sh      # Installationsskript
+└── watchtower-setup.sh      # Installationsskript
 ```
 
 ---
@@ -91,6 +91,8 @@ watchtower/
 * Standardmäßig überwacht Watchtower **alle Container**.
 * Falls nur bestimmte Container aktualisiert werden sollen, können deren Namen im Script am Ende angegeben werden.
 * Stelle sicher, dass `/var/run/docker.sock` gemountet wird, sonst funktioniert der Zugriff nicht.
+* Watchtower aktualisiert standardmäßig **auch sich selbst**. Willst du das verhindern, schließe den Container über ein Label aus: `--label com.centurylinklabs.watchtower.enable=false`.
+* ⚠️ **Sicherheit:** Das Mounten von `/var/run/docker.sock` gibt dem Container faktisch Root-Rechte auf dem Host, da darüber beliebige Docker-Befehle ausgeführt werden können. Nur auf vertrauenswürdigen Systemen einsetzen.
 
 ---
 

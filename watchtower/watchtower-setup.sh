@@ -17,5 +17,5 @@ docker run -d \
   -e WATCHTOWER_CLEANUP=true \
   -e DOCKER_API_VERSION=1.44 \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  containrrr/watchtower \
+  nickfedor/watchtower \
   --interval 18000   # 5 Stunden in Sekunden
